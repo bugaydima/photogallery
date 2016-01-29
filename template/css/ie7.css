@@ -1,0 +1,13 @@
+html {
+	overflow-x:hidden;
+}
+
+body {
+	overflow: visible;
+}
+
+.ddsmoothmenu ul li {
+	display: inline-block;
+	margin-bottom: -1px;
+}
+

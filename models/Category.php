@@ -27,7 +27,47 @@ class Category {
         }
         return $categoryList;
     }
+    public static function getCategoryList2(){
+        
+        $db = Db::getConnection();
+        
+        $categoryList2 = array();
+        
+        $result = $db->query('SELECT `id`, `name`, url, `parent_id` FROM category '
+                . 'WHERE status = "1" '
+                . 'ORDER BY `sort_order` ASC');
+        
+//        $categoryList2 = $result->fetchAll(PDO::FETCH_COLUMN);
+//        while ($row = $result->fetchAll(PDO::FETCH_ASSOC)){
+//            $categoryList2[] = $row;
+//        }
+        $i = 1;
+        while ($row = $result->fetch()){
+            $categoryList2[$row['id']]['id'] = $row['id'];
+            $categoryList2[$row['id']]['name'] = $row['name'];
+            $categoryList2[$row['id']]['url'] = $row['url'];
+            $categoryList2[$row['id']]['parent_id'] = $row['parent_id'];
+            $i++;
+        }
+        return $categoryList2;
+    }
     
+    public static function mapTree($categories3) {
+
+        $tree = array();
+
+        foreach ($categories3 as $id => &$node) {
+
+            if (!$node['parent_id']) {
+                $tree[$id] = &$node;
+            } else {
+                $categories3[$node['parent_id']]['children'][$id] = &$node;
+            }
+        }
+        unset($node);
+        return $tree;
+    }
+
     public static function getMenuGallery(){
         
         $db = Db::getConnection();
