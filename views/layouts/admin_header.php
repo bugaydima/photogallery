@@ -253,12 +253,12 @@ desired effect
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
         <li class="active"><a href="#"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
-        <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
+        <li><a href="#"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
             <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="/user/logout">Logout</a></li>
           </ul>
         </li>
       </ul>
