@@ -7,7 +7,7 @@
             <ul class="gallerynav">
                 <?php foreach ($categoriesPhoto as $category): ?>
                     <!--class="selected-1"-->
-                    <li class=""><a href="<?php echo $category['url']; ?>">
+                    <li class=""><a href="/category/<?php echo $category['id']; ?>">
                             <?php echo $category['name']; ?></a>
                     </li>
                 <?php endforeach; ?>
@@ -16,6 +16,7 @@
 
             <ul id="gallery" class="grid">
                 <!-- Begin Image 1 -->
+
                 <?php foreach ($allPhotos as $photo):?>
                 <li data-id="id-1" class="photography">
                     <a href="/template/gallery/large/<?php echo $photo['name'];?>" rel="prettyPhoto[gallery]">

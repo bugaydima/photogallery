@@ -360,7 +360,7 @@ $(function() {
   var $list = $('#gallery');
   var $data = $list.clone();
   
-  var $controls = $('.gallerynav');
+//  var $controls = $('.gallerynav');
   
   $controls.each(function(i) {
     

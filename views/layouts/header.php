@@ -47,13 +47,17 @@
                 <!-- Left Menu Links -->
 <div id="smoothmenu1">
     <ul id="tab-menu" class="ddsmoothmenu">
-        <?php foreach ($categories3 as $category): ?>
+        <?php foreach ($categories as $category): ?>
             <li>
                 <a href="/<?php echo $category['url']; ?>"><?php echo $category['name']; ?></a>
             </li>
         <?php endforeach; ?>
     </ul>
  
+    
+    
+    
+    
     
     <?php // if (isset($category['children'])): ?>
 <!--        <ul>
