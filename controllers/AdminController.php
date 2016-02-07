@@ -8,8 +8,7 @@ class AdminController extends AdminBase {
   
     public function actionIndex(){
         
-        $x = self::checkAdmin();
-        var_dump(parent::checkAdmin());
+        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе

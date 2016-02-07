@@ -21,7 +21,6 @@ abstract class AdminBase
         }
         // Иначе завершаем работу с сообщением об закрытом доступе
         die('Access denied');
-        return $user;
     }
     
 }
