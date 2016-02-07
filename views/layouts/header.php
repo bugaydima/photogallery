@@ -29,7 +29,7 @@
                 <img src="/template/images/logo.png" width="248" height="134" alt="" class="logo" /> <!-- Begin Social Links -->
 
                 <ul class="social">
-                    <li><a href="#"><img src="/template/images/social/rss.png" width="16" height="16" alt="" title="This is a Tool Tip"
+                    <li><a href="/admin"><img src="/template/images/social/rss.png" width="16" height="16" alt="" title="This is a Tool Tip"
                                          class="link" /></a></li>
                     <li><a href="#"><img src="/template/images/social/twitter.png" width="16" height="16" alt="" title=
                                          "This is a Tool Tip" class="link" /></a></li>

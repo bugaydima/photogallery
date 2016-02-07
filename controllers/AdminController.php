@@ -8,12 +8,15 @@ class AdminController extends AdminBase {
   
     public function actionIndex(){
         
-        self::checkAdmin();
+        $x = self::checkAdmin();
+        var_dump(parent::checkAdmin());
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
-        require_once(ROOT . '/views/admin/index.php');
+        
+        $total = Gallery::getTotalPhoto();
+        require_once(ROOT . '/views/admin/AdminIndex.php');
         return true;
     }
 }

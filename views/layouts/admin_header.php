@@ -71,6 +71,7 @@ desired effect
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
+          
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -165,6 +166,11 @@ desired effect
               </li>
             </ul>
           </li>
+          <li>
+              <a href="/" >
+                  <i class="fa fa-sign-out">&nbsp;На сайт</i>
+            </a>
+          </li>
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -252,7 +258,8 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li class="active"><a href="#"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
+        <li><a href="/admin"><i class="fa fa-folder-o"></i> <span>Главная</span></a></li>
+        <li class="active"><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
         <li><a href="#"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>

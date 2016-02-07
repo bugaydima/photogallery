@@ -9,7 +9,6 @@ abstract class AdminBase
      * Метод, который проверяет пользователя на то, является ли он администратором
      * @return boolean
      */
-    public static $user;
     public static function checkAdmin()
     {
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
@@ -22,6 +21,7 @@ abstract class AdminBase
         }
         // Иначе завершаем работу с сообщением об закрытом доступе
         die('Access denied');
+        return $user;
     }
     
 }
