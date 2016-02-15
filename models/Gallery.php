@@ -96,6 +96,20 @@ class Gallery{
         $row = $result->fetch();
         return $row['count'];
     }
+    public static function getTotalAlbumsPhoto()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'SELECT count(id) AS count FROM category WHERE parent_id = 4';
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        // Выполнение коменды
+        $result->execute();
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+        return $row['count'];
+    }
     public static function deletePhotoById($id)
     {
         // Соединение с БД

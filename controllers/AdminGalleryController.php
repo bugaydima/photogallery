@@ -16,6 +16,7 @@ class AdminGalleryController extends AdminBase {
         $allPhotos = Gallery::getAllPhotosByAdmin($count = Gallery::SHOW_BY_DEFAULT, $page);
         // Общее количетсво фотографий (необходимо для постраничной навигации)
         $total = Gallery::getTotalPhoto();
+       
         // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         
@@ -36,6 +37,9 @@ class AdminGalleryController extends AdminBase {
             // Удаляем товар
             Gallery::deletePhotoById($id);
             // Перенаправляем пользователя на страницу управлениями товарами
+            header("Location: /admin/gallery");
+        }
+        if (isset($_POST['back'])) {
             header("Location: /admin/gallery");
         }
         // Подключаем вид

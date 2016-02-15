@@ -1,5 +1,6 @@
 <?php include ROOT . '/views/layouts/admin_header.php'; ?>
 
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -28,11 +29,29 @@
                 </div>
                 <!-- /.info-box -->
             </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="info-box">
+                    <span class="info-box-icon bg-aqua"><i class="fa fa-photo"></i></span>
 
+                    <div class="info-box-content">
+                        <span class="info-box-text">Всего альбомов</span>
+                        <span class="info-box-number"><?php echo $totalAlbum;?></span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </div>
+                <!-- /.info-box -->
+            </div>
+            <div class="col-md-12 col-sm-6 col-xs-4">
+                <h2>Upload</h2>
+                <div class="upload"></div>
+                <div id="res"></div>
+            </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
+  
+
 
 <?php include ROOT . '/views/layouts/admin_footer.php'; ?>  
 

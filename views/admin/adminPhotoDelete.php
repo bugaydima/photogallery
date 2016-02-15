@@ -15,10 +15,11 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-body">
-                        <h4>Удалить товар #<?php echo $id; ?></h4>
-                        <p>Вы действительно хотите удалить этот товар?</p>
+                        <h4>Удалить фотографию #<?php echo $id; ?></h4>
+                        <p>Вы действительно хотите удалить эту фотографию?</p>
                         <form method="post">
                             <input type="submit" class="btn btn-danger" name="submit" value="Удалить" />
+                            <input type="submit" class="btn btn-primary" name="back" value="Назад" />
                         </form>
                     </div>
                     <!-- /.box-header -->
