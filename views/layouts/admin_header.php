@@ -3,11 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Admin | Главная</title>
+  <title>Admin | <?php echo $title?></title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
-  <link rel="stylesheet" href="/template/admin/bootstrap/css/style.css">
+  <link rel="stylesheet" href="/template/admin/style.css">
+
   <link rel="stylesheet" href="/template/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -25,6 +26,8 @@
   <link href="/template/admin/css/upload.css" rel="stylesheet">
   
   <script src="/template/admin/js/jquery-1.11.2.min.js"></script>
+  <!--<script src="/template/admin/js/ajax.js"></script>-->
+  <script src="/template/admin/js/myScript.js"></script>
   <script src="/template/admin/js/core.js"></script>
   <script src="/template/admin/js/upload.js"></script>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,74 +36,7 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-<script>
-      $('document').ready(function($){
-          $('.upload').upload({
-              action: 'admin',
-              label: 'Перетащите файл или кликните для выбора',
-              postKey: 'newfile',
-              maxQueue: 1,
-              maxSize: 10485760              
-          }).on("start.upload", Start)
-            .on("filestart.upload", fileStart)
-            .on("fileprogress.upload", fileProgress)
-            .on("filecomplete.upload", filePComplelele)
-            .on("fileerror.upload", fileError)
-            .on("complete.upload", Complete);
-      });
-      
-      function Start(e, files){
-          console.log("Start");
-          var html = '';
-          for(var i = 0; i < files.length; i++){
-              if(files[i].size > 10485760){
-                  alert("Size");
-              }
-              html +='<li class"qwe" data-index="' + files[i].index + '"><span class="file">' + files[i].name + '</span><progress value="0" max="100"></progress><span class="progress"></span></li>'
-          }
-          $("#res").append(html);
-      }
-      function fileStart(e, file) {
-		
-		console.log('FIle Start');
-		$("#res").find('li[data-index='+file.index+']').find('.progress').text('0%');
-	}
-        function fileProgress(e, file, percent) {
-		
-		console.log('FIle Progress');
-		$("#res")
-			.find('li[data-index='+file.index+']')
-			.find('progress').attr('value',percent)
-			.next().text(percent + '%');
-		
-	}
-        function filePComplelele (e, file, response) {
-		console.log('FIle Complete');
-		if(response == '' || response.toLowerCase() == 'error') {
-			
-			$("#res").find('li[data-index='+file.index+']')
-				.addClass('upload_error')
-				.find('.progress')
-				.text('Ошибка загрузки');
-		}
-		else {
-			$("#res").find('li[data-index='+file.index+']')
-				.addClass('upload_ok')
-				.find('.progress')
-				.text('Загружено');
-		}
-	}
-        function fileError (e, file) {
-		
-		console.log('Error');
-		$("#res").find('li[data-index='+file.index+']')
-			.addClass('upload_error')
-			.find('.progress')
-			.text('Файл не поддерживается');
-	}
-	
-	function Complete(e) {console.log('Complete');}
-        </script>
+  
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -243,7 +179,7 @@ desired effect
             </ul>
           </li>
           <li>
-              <a href="/" >
+              <a href="/" target="_blank">
                   <i class="fa fa-sign-out">&nbsp;На сайт</i>
             </a>
           </li>
@@ -336,7 +272,8 @@ desired effect
         <!-- Optionally, you can add icons to the links -->
         <li><a href="/admin"><i class="fa fa-folder-o"></i> <span>Главная</span></a></li>
         <li class="active"><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
-        <li><a href="#"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
+        <li><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
+        <li><a href="/admin/upload"><i class="fa fa-upload"></i> <span>Загрузка изображений</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">

@@ -121,5 +121,18 @@ class Gallery{
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
+    public static function saveImgToDB($path, $category = 12){
+        // Соединение с БД
+        $db = Db::getConnection();
+        
+        $sql ='INSERT INTO photos (`name`, category_id) VALUE (:name , :category)';
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':name', $path, PDO::PARAM_STR);
+        $result->bindParam(':category', $category, PDO::PARAM_INT);
+        $result->execute();
+        
+        return true;
+    }
 }
 

@@ -86,14 +86,12 @@
 <!-- ./wrapper -->
 
 <!-- REQUIRED JS SCRIPTS -->
-
 <!-- jQuery 2.2.0 -->
-<script src="/template/admin/plugins/jQuery/jQuery-2.2.0.min.js"></script>
-<!-- Bootstrap 3.3.5 -->
+<!--<script src="/template/admin/plugins/jQuery/jQuery-2.2.0.min.js"></script>-->
+ <!--Bootstrap 3.3.5--> 
 <script src="/template/admin/bootstrap/js/bootstrap.min.js"></script>
-<!-- AdminLTE App -->
+ <!--AdminLTE App--> 
 <script src="/template/admin/dist/js/app.min.js"></script>
-
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the

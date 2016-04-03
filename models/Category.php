@@ -44,7 +44,39 @@ class Category {
         }
         return $menuGallery;
     }
-    
+    public static function getAllCategoryGallery(){
+        
+        $db = Db::getConnection();
+        
+        $allGallery = [];
+        
+        $result = $db->query('SELECT id, `name`, url, status, sort_order FROM category WHERE parent_id = "4" AND `status` = "1"');
+        
+        $i = 0;
+        while ($row = $result->fetch()){
+            $allGallery[$i]['id'] = $row['id'];
+            $allGallery[$i]['name'] = $row['name'];
+            $allGallery[$i]['url'] = $row['url'];
+            $allGallery[$i]['status'] = $row['status'];
+            $allGallery[$i]['sort_order'] = $row['sort_order'];
+            $i++;
+        }
+        return $allGallery;
+    }
+    public static function getTotalCategory()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'SELECT count(id) AS count FROM category WHERE parent_id=4';
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        // Выполнение коменды
+        $result->execute();
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+        return $row['count'];
+    }
     
     
     

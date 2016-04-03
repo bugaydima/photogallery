@@ -19,7 +19,7 @@
                 <?php foreach ($allPhotos as $photo):?>
                 <li data-id="id-1" class="photography">
                     <a href="/template/gallery/large/<?php echo $photo['name'];?>" rel="prettyPhoto[gallery]">
-                        <img src="/template/gallery/small/<?php echo $photo['name'];?>" alt="" />
+                        <img src="/template/gallery/small/<?php echo $photo['name'];?>" alt="Lorem fdskfertw" />
                     </a>
                 </li>
                 <?php endforeach;?>

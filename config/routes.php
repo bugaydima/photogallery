@@ -5,6 +5,11 @@ return array(
     'user/logout' => 'user/logout',
     'admin/gallery/page-([0-9]+)' => 'adminGallery/index/$1',
     'admin/gallery/delete/([0-9]+)' => 'adminGallery/delete/$1',
+    
+    
+    'admin/upload' => 'adminUpload/index',
+    'admin/category/add' => 'adminCategory/addCategory',
+    'admin/category' => 'adminCategory/index',
     'admin/gallery' => 'adminGallery/index',
     'admin' => 'admin/index',
     // Галерея:

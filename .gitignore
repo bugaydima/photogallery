@@ -1,2 +1,3 @@
 /config/db_params.php
 .nbproject
+/template/uploads/*
