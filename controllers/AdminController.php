@@ -18,7 +18,7 @@ class AdminController extends AdminBase {
         
         $totalAlbum = Gallery::getTotalAlbumsPhoto();
         
-       
+        $title = "Главная";
         require_once(ROOT . '/views/admin/AdminIndex.php');
         return true;
     }

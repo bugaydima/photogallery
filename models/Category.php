@@ -33,7 +33,7 @@ class Category {
         
         $menuGallery = [];
         
-        $result = $db->query('SELECT id, `name`, url FROM category WHERE parent_id = "4" AND `status` = "1"');
+        $result = $db->query('SELECT id, `name`, url FROM category WHERE parent_id = "4" AND `status` = "1" ORDER BY sort_order');
         
         $i = 0;
         while ($row = $result->fetch()){
@@ -63,6 +63,25 @@ class Category {
         }
         return $allGallery;
     }
+    public static function getAdminCategoryGallery(){
+        
+        $db = Db::getConnection();
+        
+        $allGallery = [];
+        
+        $result = $db->query('SELECT id, `name`, url, status, sort_order FROM category WHERE parent_id = "4"');
+        
+        $i = 0;
+        while ($row = $result->fetch()){
+            $allGallery[$i]['id'] = $row['id'];
+            $allGallery[$i]['name'] = $row['name'];
+            $allGallery[$i]['url'] = $row['url'];
+            $allGallery[$i]['status'] = $row['status'];
+            $allGallery[$i]['sort_order'] = $row['sort_order'];
+            $i++;
+        }
+        return $allGallery;
+    }
     public static function getTotalCategory()
     {
         // Соединение с БД
@@ -78,46 +97,35 @@ class Category {
         return $row['count'];
     }
     
-    
-    
-    
-    
-    
-    
-    //    public static function getCategoryList2(){
-//        
-//        $db = Db::getConnection();
-//        
-//        $categoryList2 = array();
-//        
-//        $result = $db->query('SELECT `id`, `name`, url, `parent_id` FROM category '
-//                . 'WHERE status = "1" '
-//                . 'ORDER BY `sort_order` ASC');
-//
-//        $i = 1;
-//        while ($row = $result->fetch()){
-//            $categoryList2[$row['id']]['id'] = $row['id'];
-//            $categoryList2[$row['id']]['name'] = $row['name'];
-//            $categoryList2[$row['id']]['url'] = $row['url'];
-//            $categoryList2[$row['id']]['parent_id'] = $row['parent_id'];
-//            $i++;
-//        }
-//        return $categoryList2;
-//    }
-//    
-//    public static function mapTree($categories3) {
-//
-//        $tree = array();
-//
-//        foreach ($categories3 as $id => &$node) {
-//
-//            if (!$node['parent_id']) {
-//                $tree[$id] = &$node;
-//            } else {
-//                $categories3[$node['parent_id']]['children'][$id] = &$node;
-//            }
-//        }
-//        unset($node);
-//        return $tree;
-//    }
+    public static function createCategory($name, $sortOrder, $status)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'INSERT INTO category (name, parent_id, sort_order, status) '
+                . 'VALUES (:name, 4, :sort_order, :status)';
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':name', $name, PDO::PARAM_STR);
+        $result->bindParam(':sort_order', $sortOrder, PDO::PARAM_INT);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
+        return $result->execute();
+    }
+    /**
+     * Возвращает текстое пояснение статуса для категории :<br/>
+     * <i>0 - Скрыта, 1 - Отображается</i>
+     * @param integer $status <p>Статус</p>
+     * @return string <p>Текстовое пояснение</p>
+     */
+    public static function getStatusText($status)
+    {
+        switch ($status) {
+            case '1':
+                return 'Отображается';
+                break;
+            case '0':
+                return 'Скрытый';
+                break;
+        }
+    }
 }

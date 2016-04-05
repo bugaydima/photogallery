@@ -15,25 +15,25 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">Добавить новый альбом</h3>
                             </div>
-                            <form role="form">
+                            <form role="form" action="#" method="post">
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Название</label>
-                                    <input type="text" class="form-control" placeholder="Название ...">
+                                    <input type="text" class="form-control" placeholder="Название ..." name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>Порядковый номер</label>
-                                    <input type="text" class="form-control" placeholder="Номер ...">
+                                    <input type="text" class="form-control" placeholder="Номер ..." name="sort_order">
                                 </div>
                                 <div class="form-group">
                                     <label>Статус</label>
-                                    <select class="form-control">
-                                        <option>Отображаеться</option>
-                                        <option>Скрытый</option>
+                                    <select class="form-control" name="status">
+                                        <option value="1">Отображаеться</option>
+                                        <option value="0">Скрытый</option>
                                     </select>
                                 </div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary"><i class="fa  fa-save"></i>&nbsp;&nbsp;Сохранить</button>
+                                    <button type="submit" class="btn btn-primary" name="submit"><i class="fa  fa-save"></i>&nbsp;&nbsp;Сохранить</button>
                                 </div>
                             </form>
                         </div>

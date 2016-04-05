@@ -19,7 +19,7 @@ class AdminGalleryController extends AdminBase {
        
         // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
-        
+        $title = "Галерея";
         require_once(ROOT . '/views/admin/adminGallery.php');
         return true;
     }

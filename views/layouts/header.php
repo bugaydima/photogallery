@@ -5,7 +5,7 @@
 
         <title>Портфолио</title>
         
-        <link rel="shortcut icon" href="/template/favicon.ico">
+        <link rel="shortcut icon" href="/template/favicon.ico" type="image/x-icon">
         <link rel="stylesheet" type="text/css" href="/template/css/style.css" media="all" />
         <link rel="stylesheet" media="all" href="/template/css/prettyPhoto.css" type="text/css" />
         <link rel="stylesheet" media="all" href="/template/css/tipTip.css" type="text/css" />

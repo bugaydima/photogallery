@@ -21,7 +21,7 @@
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="/template/admin/dist/css/skins/skin-blue.min.css">
-  
+  <link rel="shortcut icon" href="/template/photo.ico" type="image/x-icon">
   
   <link href="/template/admin/css/upload.css" rel="stylesheet">
   
