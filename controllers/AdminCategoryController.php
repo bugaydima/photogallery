@@ -19,7 +19,7 @@ class AdminCategoryController extends AdminBase {
         require_once(ROOT . '/views/admin_category/adminCategory.php');
         return true;
     }
-    public static function actionAddCategory()
+    public function actionAddCategory()
     {
         self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
@@ -50,6 +50,30 @@ class AdminCategoryController extends AdminBase {
         }
         $title = "Добавления альбома";
         require_once(ROOT . '/views/admin_category/create.php');
+        return true;
+    }
+    public function actionDelete($id)
+    {
+        // Проверка доступа
+        self::checkAdmin();
+        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
+        $userId = User::checkLogged();
+        // Получаем информацию о текущем пользователе
+        $user = User::getUserById($userId);
+        // Обработка формы
+        if (isset($_POST['submit'])) {
+            // Если форма отправлена
+            // Удаляем товар
+            Category::deleteCategoryById($id);
+            // Перенаправляем пользователя на страницу управлениями товарами
+            header("Location: /admin/category");
+        }
+        if (isset($_POST['back'])) {
+            header("Location: /admin/category");
+        }
+        $title = "Удалить альбом";
+        // Подключаем вид
+        require_once(ROOT . '/views/admin_category/delete.php');
         return true;
     }
 }
