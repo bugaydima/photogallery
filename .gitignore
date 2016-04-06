@@ -1,3 +1,5 @@
 /config/db_params.php
 .nbproject
 /template/uploads/*
+/template/gallery/large/*
+/template/gallery/small/*
