@@ -9,7 +9,20 @@
                     <li><a href="/admin/category">Альбомы</a></li>
                     <li class="active"><a href="/admin/category/add">Добавления альбома</a></li>
                 </ol>
+
                 <div class="box">
+                  <?php if (isset($errors) && is_array($errors)): ?>
+                    <div class="box box-solid box-danger">
+                        <div class="box-header">Заполните все поля!</div>
+                            <div class="box-body">
+                                <ul style="list-style-type: none; content: "&nbsp"; ">
+                                <?php foreach ($errors as $error): ?>
+                                    <li> - <?php echo $error; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                            </div>
+                    </div>
+                <?php endif; ?>
                     <div class="box-header">
                         <div class="box box-success">
                             <div class="box-header with-border">

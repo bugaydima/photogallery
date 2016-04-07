@@ -38,7 +38,10 @@ class AdminCategoryController extends AdminBase {
             $errors = false;
             // При необходимости можно валидировать значения нужным образом
             if (!isset($name) || empty($name)) {
-                $errors[] = 'Заполните поля';
+                $errors[] = 'Заполните поле название';
+            }
+            if (!isset($sort_order) || empty($sort_order)) {
+                $errors[] = 'Заполните поле порядковый номер';
             }
             if ($errors == false) {
                 // Если ошибок нет
