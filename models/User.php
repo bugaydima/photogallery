@@ -79,7 +79,7 @@ class User {
      */
     public static function checkName($name){
         
-        if (strlen($name) >= 2) {
+        if (mb_strlen($name) >= 2) {
             return true;
         }
         return false;

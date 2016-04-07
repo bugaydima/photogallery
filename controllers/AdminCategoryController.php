@@ -37,11 +37,8 @@ class AdminCategoryController extends AdminBase {
             // Флаг ошибок в форме
             $errors = false;
             // При необходимости можно валидировать значения нужным образом
-            if (!isset($name) || empty($name)) {
-                $errors[] = 'Заполните поле название';
-            }
-            if (!isset($sort_order) || empty($sort_order)) {
-                $errors[] = 'Заполните поле порядковый номер';
+            if (!User::checkName($name)){
+                $errors[] = 'Имя не должно быть короче 2-х символов';
             }
             if ($errors == false) {
                 // Если ошибок нет

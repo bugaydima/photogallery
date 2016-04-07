@@ -14,7 +14,11 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
+                        
+                        <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</a>
+                        <div class="col-xs-2">
                         <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp; Добавить альбом</a>
+                        </div>
                         <div class="box-tools">
                             <div class="input-group input-group-sm" style="width: 150px;">
                                 <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -28,7 +32,7 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover table-bordered">
                             <tr>
-                                <th style="width: 10px"></th>
+                                <th style="width: 10px"><input type="checkbox" id="checkAll"></th>
                                 <th style="width: 10px" >ID</th>
                                 <th>Название</th>
                                 <th>Порядковый номер</th>
@@ -38,7 +42,7 @@
                             </tr>
                             <?php foreach ($category as $cat): ?>
                                 <tr>
-                                    <td><input type="checkbox"></td>
+                                    <td><input type="checkbox" value="<?= $cat['id'];?>"></td>
                                     <td><?php echo $cat['id']; ?></td>
                                     <td><?php echo $cat['name']; ?></td>
                                     <td><?php echo $cat['sort_order']; ?></td>
