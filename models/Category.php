@@ -111,6 +111,22 @@ class Category {
         $result->bindParam(':status', $status, PDO::PARAM_INT);
         return $result->execute();
     }
+        /**
+     * Удаляет категорию с заданным id
+     * @param integer $id
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function deleteCategoryById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'DELETE FROM category WHERE id = :id';
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        return $result->execute();
+    }
     /**
      * Возвращает текстое пояснение статуса для категории :<br/>
      * <i>0 - Скрыта, 1 - Отображается</i>

@@ -9,6 +9,7 @@ return array(
     
     'admin/upload' => 'adminUpload/index',
     'admin/category/add' => 'adminCategory/addCategory',
+    'admin/category/delete/([0-9]+)' => 'adminCategory/delete/$1',
     'admin/category' => 'adminCategory/index',
     'admin/gallery' => 'adminGallery/index',
     'admin' => 'admin/index',

@@ -37,10 +37,10 @@ class AdminGalleryController extends AdminBase {
             // Удаляем товар
             Gallery::deletePhotoById($id);
             // Перенаправляем пользователя на страницу управлениями товарами
-            header("Location: /admin/adminGallery");
+            header("Location: /admin/gallery");
         }
         if (isset($_POST['back'])) {
-            header("Location: /admin/adminGallery");
+            header("Location: /admin/gallery");
         }
         // Подключаем вид
         require_once(ROOT . '/views/admin/adminPhotoDelete.php');
