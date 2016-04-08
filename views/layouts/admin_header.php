@@ -267,14 +267,6 @@ desired effect
       <!-- /.search form -->
 
       <!-- Sidebar Menu -->
-<!--       <script>
-          $(function() {
-              $('.sidebar-menu').on('click', 'li', function(event) {
-                   $(this).addClass("active").siblings().removeClass("active");  
-                   event.preventDefault();
-              });
-          });
-      </script> -->
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->

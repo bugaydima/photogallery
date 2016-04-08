@@ -14,8 +14,7 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        
-                        <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</a>
+                        <a id="delete_select" class="btn btn-primary" href="/admin/category/add"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</a>
                         <div class="col-xs-2">
                         <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp; Добавить альбом</a>
                         </div>
@@ -32,7 +31,7 @@
                     <div class="box-body table-responsive no-padding">
                         <table class="table table-hover table-bordered">
                             <tr>
-                                <th style="width: 10px"><input type="checkbox" id="checkAll"></th>
+                                <th style="width: 10px"><input type="checkbox" id="check_all" class="checkbox"></th>
                                 <th style="width: 10px" >ID</th>
                                 <th>Название</th>
                                 <th>Порядковый номер</th>
@@ -42,13 +41,14 @@
                             </tr>
                             <?php foreach ($category as $cat): ?>
                                 <tr>
-                                    <td><input type="checkbox" value="<?= $cat['id'];?>"></td>
+                                    <td><input type="checkbox" name="check_name[]" value="<?= $cat['id'];?>" 
+                                    class="checkbox"></td>
                                     <td><?php echo $cat['id']; ?></td>
                                     <td><?php echo $cat['name']; ?></td>
                                     <td><?php echo $cat['sort_order']; ?></td>
                                     <td><?php echo Category::getStatusText($cat['status']); ?></td>
                                     <td><a href="/admin/category/update/<?php echo $cat['id']; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
-                                    <td><a href="/admin/category/delete/<?php echo $cat['id']; ?>" title="Удалить"><i class="fa fa-times"></i></a></td>
+                                    <td><a href="/admin/category/delete/<?php echo $cat['id']; ?>" title="Удалить"><i class="fa fa-trash-o"></i></a></td>
                                 </tr>
                             <?php endforeach; ?>
 
@@ -57,7 +57,6 @@
                         <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
                             Launch demo modal
                         </button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">

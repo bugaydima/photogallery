@@ -94,3 +94,27 @@ function funcBefore() {
 function funcSuccess(data) {
     $('#info').text("Заввершено");
 }
+    
+
+// ####################################################################
+// Выделить все checkbox
+$(document).ready(function(){
+    $("#check_all").on('click',function () {
+        if (!$("#check_all").is(":checked"))
+            $(".checkbox").removeAttr("checked");
+        else
+            $(".checkbox").prop("checked","checked");
+    });
+// При выборе checkbox показать кнопку удалить
+    $("#delete_select").hide();
+
+    
+    $(".checkbox").click(function () {
+        if (!$(".checkbox").is(":checked")) 
+            $("#delete_select").hide();
+        else
+             $("#delete_select").show();
+    });
+
+
+  });

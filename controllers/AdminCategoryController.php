@@ -61,6 +61,11 @@ class AdminCategoryController extends AdminBase {
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
         // Обработка формы
+        if(isset($_POST['del_check']))
+        {
+           $sql = "DELETE FROM `news` WHERE `id`IN ($check_str)";
+        $db->query($sql);
+        }
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем товар
