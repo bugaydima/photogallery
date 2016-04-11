@@ -12,7 +12,7 @@ class Gallery{
         $offset = ($page - 1) * $count;
     // Соединение с БД
         $db = Db::getConnection();
-        $sql = 'SELECT id, `name`, `category_id` FROM photos '
+        $sql = 'SELECT id, `name`, `category_id`, status FROM photos '
                                 . 'ORDER BY id ASC LIMIT :count OFFSET :offset';
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -30,6 +30,7 @@ class Gallery{
             $photosList[$i]['id'] = $row['id'];
             $photosList[$i]['name'] = $row['name'];
             $photosList[$i]['category_id'] = $row['category_id'];
+            $photosList[$i]['status'] = $row['status'];
             $i++;
         }
         return $photosList;
@@ -120,6 +121,41 @@ class Gallery{
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
+    }
+    public static function updatePhotoById($id, $name, $category, $status)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = "UPDATE photos
+                SET 
+                    `name` = :name, 
+                    category_id = :category, 
+                    status = :status 
+                WHERE id = :id";
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':name', $name, PDO::PARAM_STR);
+        $result->bindParam(':category', $category, PDO::PARAM_INT);
+        $result->bindParam(':status', $status, PDO::PARAM_INT);
+        return $result->execute();
+    }
+    public static function getPhotoById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'SELECT * FROM photos WHERE id = :id';
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        // Выполняем запрос
+        $result->execute();
+        // Возвращаем данные
+        return $result->fetch();
     }
     public static function saveImgToDB($path, $category = 12){
         // Соединение с БД
