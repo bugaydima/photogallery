@@ -14,8 +14,11 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
+                    <div class="box box-solid box-danger">
+                        <div class="box-header">
+                            <h4>Удалить фотографию #<?php echo $id; ?></h4>
+                        </div>    
                     <div class="box-body">
-                        <h4>Удалить фотографию #<?php echo $id; ?></h4>
                         <p>Вы действительно хотите удалить эту фотографию?</p>
                         <form method="post">
                             <input type="submit" class="btn btn-danger" name="submit" value="Удалить" />

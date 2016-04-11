@@ -16,6 +16,7 @@ class AdminCategoryController extends AdminBase {
         // Создаем объект Pagination - постраничная навигация
 //        $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         $title = "Управления альбомами";
+        
         require_once(ROOT . '/views/admin_category/adminCategory.php');
         return true;
     }
@@ -61,11 +62,6 @@ class AdminCategoryController extends AdminBase {
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
         // Обработка формы
-        if(isset($_POST['del_check']))
-        {
-           $sql = "DELETE FROM `news` WHERE `id`IN ($check_str)";
-        $db->query($sql);
-        }
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем товар
@@ -79,6 +75,33 @@ class AdminCategoryController extends AdminBase {
         $title = "Удалить альбом";
         // Подключаем вид
         require_once(ROOT . '/views/admin_category/delete.php');
+        return true;
+    }
+     public function actionUpdate($id)
+    {
+        // Проверка доступа
+        self::checkAdmin();
+        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
+        $userId = User::checkLogged();
+        // Получаем информацию о текущем пользователе
+        $user = User::getUserById($userId);
+        // Получаем данные о конкретной категории
+        $category = Category::getCategoryById($id);
+        // Обработка формы
+        if (isset($_POST['submit'])) {
+            // Если форма отправлена   
+            // Получаем данные из формы
+            $name = $_POST['name'];
+            $sortOrder = $_POST['sort_order'];
+            $status = $_POST['status'];
+            // Сохраняем изменения
+            Category::updateCategoryById($id, $name, $sortOrder, $status);
+            // Перенаправляем пользователя на страницу управлениями категориями
+            header("Location: /admin/category");
+        }
+        $title = "Редактировать альбом";
+        // Подключаем вид
+        require_once(ROOT . '/views/admin_category/update.php');
         return true;
     }
 }

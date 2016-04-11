@@ -14,8 +14,9 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <a id="delete_select" class="btn btn-primary" href="/admin/category/add"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</a>
-                        <div class="col-xs-2">
+                        <button id="delete_select" class="btn btn-primary" name="delete"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</button>
+                        
+                        <div class="col-xs-3">
                         <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp; Добавить альбом</a>
                         </div>
                         <div class="box-tools">

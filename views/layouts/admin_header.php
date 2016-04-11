@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Admin | <?php echo $title?></title>
+  <link rel="shortcut icon" href="/template/favicon.ico" type="image/x-icon">
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="/template/admin/style.css">
-  <link rel="shortcut icon" href="/template/favicon.ico" type="image/x-icon">
+  
   <link rel="stylesheet" href="/template/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -36,7 +37,14 @@
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  
+  <style>
+       .active2{
+          border-left: 3px solid #3c8dbc;
+          color: #fff;
+            background: #1e282c;
+            border-left-color: #3c8dbc;
+      }
+  </style>
 </head>
 <!--
 BODY TAG OPTIONS:
@@ -273,7 +281,7 @@ desired effect
         <li><a href="/admin"><i class="fa fa-folder-o"></i> <span>Главная</span></a></li>
         <li><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
         <li><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
-        <li><a href="/admin/upload"><i class="fa fa-upload"></i> <span>Загрузка изображений</span></a></li>
+        <li><a href="/admin/upload"><i class="fa fa-download"></i> <span>Загрузка изображений</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">

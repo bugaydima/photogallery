@@ -17,8 +17,7 @@
         <div class="col-xs-12">
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Обзор</h3>
-                <a class="btn btn-primary" href="/admin/upload">Загрузить</a>
+                <a class="btn btn-primary" href="/admin/upload"><i class="fa  fa-download"></i>&nbsp;&nbsp;Загрузить</a>
               <div class="box-tools">
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
@@ -33,23 +32,26 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover table-bordered">
                 <tr>
-                  <th style="width: 10px"></th>
+                  <th style="width: 10px"><input type="checkbox" id="check_all" class="checkbox"></th>
                   <th style="width: 10px" >ID</th>
-                  <th>Name</th>
+                  <th style="width: 100px">Name</th>
                   <th>Preview</th>
                   <th>Category</th>
+                  <th>Status</th>
                   <th style="width: 20px">Edit</th>
                   <th style="width: 20px">Delete</th>
                 </tr>
                 <?php foreach ($allPhotos as $photo):?>
                 <tr>
-                    <td><input type="checkbox"></td>
+                    <td><input type="checkbox" name="check_name[]" value="<?= $photo['id'];?>" 
+                                    class="checkbox"></td>
                     <td><?php echo $photo['id'];?></td>
                   <td><?php echo $photo['name'];?></td>
                   <td><img src="/template/gallery/small/<?php echo $photo['name'];?>"  width="75" height="50" /></td>
                   <td><?php echo $photo['category_id'];?></td>
+                  <td><?php echo Category::getStatusText($photo['status']); ?></td>
                   <td><a href="/admin/gallery/update/<?php echo $photo['id']; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
-                  <td><a href="/admin/gallery/delete/<?php echo $photo['id']; ?>" title="Удалить"><i class="fa fa-times"></i></a></td>
+                  <td><a href="/admin/gallery/delete/<?php echo $photo['id']; ?>" title="Удалить"><i class="fa fa-trash-o"></i></a></td>
                 </tr>
                 <?php endforeach;?>
                 

@@ -20,7 +20,7 @@ class AdminGalleryController extends AdminBase {
         // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         $title = "Галерея";
-        require_once(ROOT . '/views/admin/adminGallery.php');
+        require_once(ROOT . '/views/admin/admin_gallery/gallery.php');
         return true;
     }
     public function actionDelete($id)
@@ -43,7 +43,35 @@ class AdminGalleryController extends AdminBase {
             header("Location: /admin/gallery");
         }
         // Подключаем вид
-        require_once(ROOT . '/views/admin/adminPhotoDelete.php');
+        require_once(ROOT . '/views/admin/admin_gallery/delete.php');
+        return true;
+    }
+    public function actionUpdate($id)
+    {
+        // Проверка доступа
+        self::checkAdmin();
+        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
+        $userId = User::checkLogged();
+        // Получаем информацию о текущем пользователе
+        $user = User::getUserById($userId);
+        
+        $category = Category::getCategoryGallery();
+        $photo = Gallery::getPhotoById($id);
+        
+        if (isset($_POST['submit'])) {
+            // Если форма отправлена   
+            // Получаем данные из формы
+            $name = $_POST['name'];
+            $category = $_POST['category'];
+            $status = $_POST['status'];
+            // Сохраняем изменения
+            Gallery::updatePhotoById($id, $name, $category, $status);
+            // Перенаправляем пользователя на страницу управлениями категориями
+            header("Location: /admin/gallery");
+        }
+        $title = 'Редактирование фото';
+        // Подключаем вид
+        require_once(ROOT . '/views/admin/admin_gallery/update.php');
         return true;
     }
 }
