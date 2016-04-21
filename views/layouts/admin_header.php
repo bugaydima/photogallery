@@ -381,10 +381,10 @@ desired effect
         <li class="<?php if (Category::getURI() == '/admin/category') echo 'active';?>"><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления альбомами</span></a></li>
         <li class="<?php if (Category::getURI() == '/admin/upload') echo 'active';?>"><a href="/admin/upload"><i class="fa fa-download"></i> <span>Загрузка изображений</span></a></li>
         <li class="treeview">
-          <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
+          <a href="#"><i class="fa fa-user"></i> <span>Пользователи</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="/user/logout">Logout</a></li>
+            <li><a href="#"><i class="fa fa-user-plus"></i>Управления пользователями</a></li>
+            <li><a href="/user/logout"><i class="fa  fa-sign-out"></i>Выход</a></li>
           </ul>
         </li>
       </ul>
