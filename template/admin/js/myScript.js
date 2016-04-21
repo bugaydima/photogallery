@@ -4,30 +4,16 @@ $('document').ready(function ($) {
         label: 'Перетащите файл или кликните для выбора',
         postKey: 'newfile',
         maxQueue: 1,
-//        postData: {data2: $('#my_select option:selected').val()},
         maxSize: 300485760
     }).on("start.upload", Start)
             .on("filestart.upload", fileStart)
             .on("fileprogress.upload", fileProgress)
             .on("filecomplete.upload", filePComplelele)
-            .on("fileerror.upload", fileError)
-            .on("complete.upload", Complete);
-    });
+            .on("fileerror.upload", fileError);
             
-           
-//   $("#my_select").change(function(){
-//            var data = $(this).val();
-//            console.log(data);
-//        });   
-//var data  = $('#my_select').val();
-//    console.log(data);
-
-//var data = $('#my_select option:selected').val();
-
-
+    });
 
 function Start(e, files) {
-    console.log("Start");
     var html = '';
     for (var i = 0; i < files.length; i++) {
         if (files[i].size > 300485760) {
@@ -39,29 +25,21 @@ function Start(e, files) {
     
 }
 function fileStart(e, file) {
-   
-      
         $.ajax({
             url: "/admin/upload",
             type: "POST",
             data: ({data: $("#my_select option:selected").val()}),
-            dataType: "html",
-            beforeSend: funcBefore,
-            success: funcSuccess
+            dataType: "html"
         });
-   
-    console.log('FIle Start');
     $("#res").find('li[data-index=' + file.index + ']').find('.progress').text('0%');
 }
 function fileProgress(e, file, percent) {
-    console.log('FIle Progress');
     $("#res")
             .find('li[data-index=' + file.index + ']')
             .find('progress').attr('value', percent)
             .next().text(percent + '%');
 }
 function filePComplelele(e, file, response) {
-        console.log('FIle Complete');
     if (response == '' || response.toLowerCase() == 'error') {
         $("#res").find('li[data-index=' + file.index + ']')
                 .addClass('upload_error')
@@ -70,32 +48,15 @@ function filePComplelele(e, file, response) {
     } else {
         $("#res").find('li[data-index=' + file.index + ']')
                 .addClass('upload_ok')
-                .find('.progress')
-                .text('Загружено');
+                .find('.progress');
     }
 }
 function fileError(e, file) {
-
-    console.log('Error');
     $("#res").find('li[data-index=' + file.index + ']')
             .addClass('upload_error')
             .find('.progress')
             .text('Файл не поддерживается');
 }
-
-function Complete(e) {
-
-//var data = $('#my_select option:selected').val();
-//    console.log(data);
-}
-function funcBefore() {
-    $('#info').text('Ожидание данных...');
-}
-function funcSuccess(data) {
-    $('#info').text("Заввершено");
-}
-    
-
 // ####################################################################
 // Выделить все checkbox
 $(document).ready(function(){
@@ -114,8 +75,6 @@ $(document).ready(function(){
             $("#delete_select").hide();
         else
              $("#delete_select").show();
-         
-
     });
  
     $('#delete_select').click(function(){
@@ -128,15 +87,5 @@ $(document).ready(function(){
             // success: ShowMessage
         });
     });
-    
-$(function () {                                      // Когда страница загрузится
-    $('.sidebar-menu a').each(function () {             // получаем все нужные нам ссылки
-        var location = window.location.href; // получаем адрес страницы
-        var link = this.href;                // получаем адрес ссылки
-        if(location == link) {               // при совпадении адреса ссылки и адреса окна
-            $(this).addClass('active2');  //добавляем класс
-        }
-    });
-});
   });
   

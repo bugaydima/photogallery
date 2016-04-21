@@ -29,6 +29,7 @@ class AdminUploadController extends AdminBase{
                 }
             }
         }
+        $title = "Загрузка изображений";
         require_once(ROOT . '/views/admin/adminUpload.php');
         return true;
     }

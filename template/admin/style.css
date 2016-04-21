@@ -71,7 +71,7 @@ li{
 }	
 li.qwe{
     list-style-image: none;
-    list-style-position: outside;
+    list-style-position: inside;
     list-style-type: none;
     
     margin-bottom: 10px;
@@ -93,4 +93,8 @@ progress {
 	display: block;
     float: left;
     width: 20%;
+}
+.progress{
+    margin-left: 100px;
+    color: #455a64;
 }
