@@ -1,6 +1,6 @@
 <?php
 /**
- * Класс Gallery - модель для работы с галереей 
+ * Класс Gallery - модель для работы с галереей
  * @author Dima
  */
 class Gallery{
@@ -8,19 +8,20 @@ class Gallery{
     const SHOW_BY_DEFAULT = 8;
 
     public static function getAllPhotosByAdmin($count = self::SHOW_BY_DEFAULT, $page = 1){
-        
+
         $offset = ($page - 1) * $count;
     // Соединение с БД
         $db = Db::getConnection();
-        $sql = 'SELECT id, `name`, `category_id`, status FROM photos '
-                                . 'ORDER BY id ASC LIMIT :count OFFSET :offset';
+        $sql = 'SELECT id, `name`, `category_id`, status'
+             .' FROM photos '
+             . 'ORDER BY id ASC LIMIT :count OFFSET :offset';
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':count', $count, PDO::PARAM_INT);
         $result->bindParam(':offset', $offset, PDO::PARAM_INT);
         // Указываем, что хотим получить данные в виде массива
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        
+
         // Выполнение коменды
         $result->execute();
         // Получение и возврат результатов
@@ -36,10 +37,10 @@ class Gallery{
         return $photosList;
     }
    public static function getAllPhotos($count = self::SHOW_BY_DEFAULT){
-        
+
     // Соединение с БД
         $db = Db::getConnection();
-        
+
         $sql = 'SELECT id, `name` FROM photos '
                                 . 'LIMIT :count';
         // Используется подготовленный запрос
@@ -47,7 +48,7 @@ class Gallery{
         $result->bindParam(':count', $count, PDO::PARAM_INT);
         // Указываем, что хотим получить данные в виде массива
         $result->setFetchMode(PDO::FETCH_ASSOC);
-        
+
         // Выполнение коменды
         $result->execute();
         // Получение и возврат результатов
@@ -59,15 +60,15 @@ class Gallery{
             $i++;
         }
         return $photosList;
-    } 
+    }
     public static function getPhotoListByCategoryId($categoryId){
-        
+
         $db = Db::getConnection();
-        
+
         $sql = 'SELECT id, `name` '
              . 'FROM photos '
              . 'WHERE category_id = :category_id ';
-                
+
         $result = $db->prepare($sql);
         $result->bindParam(':category_id', $categoryId, PDO::PARAM_INT);
         // Выполнение коменды
@@ -81,7 +82,7 @@ class Gallery{
             $i++;
         }
         return $photo;
-        
+
     }
         public static function getTotalPhoto()
     {
@@ -128,10 +129,10 @@ class Gallery{
         $db = Db::getConnection();
         // Текст запроса к БД
         $sql = "UPDATE photos
-                SET 
-                    `name` = :name, 
-                    category_id = :category, 
-                    status = :status 
+                SET
+                    `name` = :name,
+                    category_id = :category,
+                    status = :status
                 WHERE id = :id";
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
@@ -160,14 +161,14 @@ class Gallery{
     public static function saveImgToDB($path, $category = 12){
         // Соединение с БД
         $db = Db::getConnection();
-        
+
         $sql ='INSERT INTO photos (`name`, category_id) VALUE (:name , :category)';
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $path, PDO::PARAM_STR);
         $result->bindParam(':category', $category, PDO::PARAM_INT);
         $result->execute();
-        
+
         return true;
     }
 }

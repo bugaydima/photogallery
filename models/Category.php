@@ -9,15 +9,15 @@ class Category {
      * @return array <p>Массив с категориями</p>
      */
     public static function getCategoryList(){
-        
+
         $db = Db::getConnection();
-        
+
         $categoryList = array();
-        
+
         $result = $db->query('SELECT `id`, `name`, `url` FROM category '
                 . 'WHERE status = "1" AND parent_id = "0"'
                 . 'ORDER BY `sort_order`, `name` ASC');
-        
+
         $i = 0;
         while ($row = $result->fetch()){
             $categoryList[$i]['id'] = $row['id'];
@@ -28,13 +28,13 @@ class Category {
         return $categoryList;
     }
     public static function getCategoryGallery(){
-        
+
         $db = Db::getConnection();
-        
+
         $menuGallery = [];
-        
+
         $result = $db->query('SELECT id, `name`, url FROM category WHERE parent_id = "4" AND `status` = "1" ORDER BY sort_order');
-        
+
         $i = 0;
         while ($row = $result->fetch()){
             $menuGallery[$i]['id'] = $row['id'];
@@ -45,13 +45,13 @@ class Category {
         return $menuGallery;
     }
     public static function getAllCategoryGallery(){
-        
+
         $db = Db::getConnection();
-        
+
         $allGallery = [];
-        
+
         $result = $db->query('SELECT id, `name`, url, status, sort_order FROM category WHERE parent_id = "4" AND `status` = "1"');
-        
+
         $i = 0;
         while ($row = $result->fetch()){
             $allGallery[$i]['id'] = $row['id'];
@@ -64,13 +64,13 @@ class Category {
         return $allGallery;
     }
     public static function getAdminCategoryGallery(){
-        
+
         $db = Db::getConnection();
-        
+
         $allGallery = [];
-        
+
         $result = $db->query('SELECT id, `name`, url, status, sort_order FROM category WHERE parent_id = "4"');
-        
+
         $i = 0;
         while ($row = $result->fetch()){
             $allGallery[$i]['id'] = $row['id'];
@@ -82,6 +82,24 @@ class Category {
         }
         return $allGallery;
     }
+    public static function getAdminCategory()
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+
+        $allCategory = [];
+         // Текст запроса к БД
+        $result = $db->query('SELECT id, `name`, url FROM admin_category');
+        $i = 0;
+        while ($row = $result->fetch()){
+            $allCategory[$i]['id'] = $row['id'];
+            $allCategory[$i]['name'] = $row['name'];
+            $allCategory[$i]['url'] = $row['url'];
+            $i++;
+        }
+        return $allCategory;
+    }
+
     public static function getTotalCategory()
     {
         // Соединение с БД
@@ -96,7 +114,7 @@ class Category {
         $row = $result->fetch();
         return $row['count'];
     }
-    
+
     public static function createCategory($name, $sortOrder, $status)
     {
         // Соединение с БД
@@ -162,9 +180,9 @@ class Category {
         $db = Db::getConnection();
         // Текст запроса к БД
         $sql = "UPDATE category
-            SET 
-                name = :name, 
-                sort_order = :sort_order, 
+            SET
+                name = :name,
+                sort_order = :sort_order,
                 status = :status
             WHERE id = :id";
         // Получение и возврат результатов. Используется подготовленный запрос
@@ -191,5 +209,22 @@ class Category {
                 return 'Скрытый';
                 break;
         }
+    }
+    /**
+     * Возвращает текстое пояснение статуса для категории :<br/>
+     * <i>0 - Скрыта, 1 - Отображается</i>
+     * @return string <p>Текстовое пояснение</p>
+     */
+    public static function getURI() 
+    {
+        $uri = $_SERVER['REQUEST_URI'];
+        $uri = explode('/', $uri);
+        if (isset($uri[2])){
+        $result = "/" . $uri[1] . "/" . $uri[2];
+        }
+        else {
+           $result = "/" . $uri[1];
+        }
+    return $result; 
     }
 }

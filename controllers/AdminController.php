@@ -5,19 +5,20 @@
  * @author Dima
  */
 class AdminController extends AdminBase {
-  
+
     public function actionIndex(){
-        
+
         self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
-        
-        $total = Gallery::getTotalPhoto(); 
-        
+
+        $total = Gallery::getTotalPhoto();
+
         $totalAlbum = Gallery::getTotalAlbumsPhoto();
-        
+
+        $category = Category::getAdminCategory();
         $title = "Главная";
         require_once(ROOT . '/views/admin/AdminIndex.php');
         return true;
