@@ -15,7 +15,7 @@
                 <h4><label for="sel1"><span class="label label-info">Категория</span></label></h4>
 
                 <select class="form-control" id = "my_select" name="select">
-                    <?php foreach ($category as $cat): ?>
+                    <?php foreach ($albums as $cat): ?>
                         <option  value="<?= $cat['id']; ?>"><?= $cat['name']; ?></option>
 
                     <?php endforeach; ?>

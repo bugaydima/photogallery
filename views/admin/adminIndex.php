@@ -1,11 +1,9 @@
 <?php include ROOT . '/views/layouts/admin_header.php'; ?>
-
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-       
+
       <h1>
         Обзор
       </h1>
@@ -13,7 +11,6 @@
         <li class="active"><a href="/admin/"><i class="fa fa-dashboard"></i>Главная</a></li>
       </ol>
     </section>
-
     <!-- Main content -->
     <section class="content">
         <div class="row">
@@ -41,12 +38,13 @@
                 </div>
                 <!-- /.info-box -->
             </div>
+        </div>
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  
 
 
-<?php include ROOT . '/views/layouts/admin_footer.php'; ?>  
+
+<?php include ROOT . '/views/layouts/admin_footer.php'; ?>
 

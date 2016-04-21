@@ -10,13 +10,13 @@ class AdminCategoryController extends AdminBase {
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
         $category = Category::getAdminCategoryGallery();
-        
+
         // Общее количетсво категорий (необходимо для постраничной навигации)
 //        $total = Category::getTotalCategory();
         // Создаем объект Pagination - постраничная навигация
 //        $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         $title = "Управления альбомами";
-        
+
         require_once(ROOT . '/views/admin_category/adminCategory.php');
         return true;
     }
@@ -27,7 +27,7 @@ class AdminCategoryController extends AdminBase {
         $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе
         $user = User::getUserById($userId);
-        
+
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
@@ -89,7 +89,7 @@ class AdminCategoryController extends AdminBase {
         $category = Category::getCategoryById($id);
         // Обработка формы
         if (isset($_POST['submit'])) {
-            // Если форма отправлена   
+            // Если форма отправлена
             // Получаем данные из формы
             $name = $_POST['name'];
             $sortOrder = $_POST['sort_order'];
@@ -104,4 +104,5 @@ class AdminCategoryController extends AdminBase {
         require_once(ROOT . '/views/admin_category/update.php');
         return true;
     }
+
 }

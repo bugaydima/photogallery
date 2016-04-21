@@ -9,7 +9,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.5 -->
   <link rel="stylesheet" href="/template/admin/style.css">
-  
+
   <link rel="stylesheet" href="/template/admin/bootstrap/css/bootstrap.min.css">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
@@ -23,9 +23,9 @@
   -->
   <link rel="stylesheet" href="/template/admin/dist/css/skins/skin-blue.min.css">
   <link rel="shortcut icon" href="/template/photo.ico" type="image/x-icon">
-  
+
   <link href="/template/admin/css/upload.css" rel="stylesheet">
-  
+
   <script src="/template/admin/js/jquery-1.11.2.min.js"></script>
   <!--<script src="/template/admin/js/ajax.js"></script>-->
   <script src="/template/admin/js/myScript.js"></script>
@@ -38,12 +38,109 @@
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style>
-       .active2{
-          border-left: 3px solid #3c8dbc;
-          color: #fff;
-            background: #1e282c;
-            border-left-color: #3c8dbc;
-      }
+      
+
+.pulse {
+  height: 100px;
+  width: 200px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+.pulse:after {
+  content: '';
+  display: block;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200px 100px" enable-background="new 0 0 200px 100px" xml:space="preserve"><polyline fill="none" stroke-width="3px" stroke="white" points="2.4,58.7 70.8,58.7 76.1,46.2 81.1,58.7 89.9,58.7 93.8,66.5 102.8,22.7 110.6,78.7 115.3,58.7 126.4,58.7 134.4,54.7 142.4,58.7 197.8,58.7 "/></svg>') 0 0 no-repeat;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  -webkit-animation: 2s pulse linear infinite;
+  -moz-animation: 2s pulse linear infinite;
+  -o-animation: 2s pulse linear infinite;
+  animation: 2s pulse linear infinite;
+    clip: rect(0, 0, 100px, 0);
+}
+.pulse:before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  left: 2px;
+  right: 2px;
+  bottom: 0;
+  top: 16px;
+  margin: auto;
+  height: 3px;
+
+}
+
+
+@-webkit-keyframes pulse {
+  0% {
+    clip: rect(0, 0, 100px, 0);
+    opacity: 0.4;
+  }
+  4% {
+    clip: rect(0, 66.66667px, 100px, 0);
+    opacity: 0.6;
+  }
+  15% {
+    clip: rect(0, 133.33333px, 100px, 0);
+    opacity: 0.8;
+  }
+  20% {
+    clip: rect(0, 300px, 100px, 0);
+     opacity: 1;
+  }
+
+  80% {
+    clip: rect(0, 300px, 100px, 0);
+     opacity:0;
+  }
+
+  90% {
+    clip: rect(0, 300px, 100px, 0);
+    opacity: 0;
+  }
+
+  100% {
+    clip: rect(0, 300px, 100px, 0);
+    opacity:0;
+ }
+}
+@keyframes pulse {
+  0% {
+    clip: rect(0, 0, 100px, 0);
+  }
+  4% {
+    clip: rect(0, 66.66667px, 100px, 0);
+  }
+  15% {
+    clip: rect(0, 133.33333px, 100px, 0);
+  }
+  20% {
+    clip: rect(0, 300px, 100px, 0);
+     opacity:1;
+  }
+
+  80% {
+    clip: rect(0, 300px, 100px, 0);
+     opacity:0;
+  }
+
+  90% {
+    opacity: 0;
+  }
+
+  100% {
+    clip: rect(0, 300px, 100px, 0);
+    opacity:0;
+ }
+  
+}
   </style>
 </head>
 <!--
@@ -67,7 +164,7 @@ desired effect
 |---------------------------------------------------------|
 -->
 <body class="hold-transition skin-blue sidebar-mini">
-      
+
 <div class="wrapper">
 
   <!-- Main Header -->
@@ -91,7 +188,7 @@ desired effect
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          
+
           <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -278,10 +375,11 @@ desired effect
       <ul class="sidebar-menu">
         <li class="header">HEADER</li>
         <!-- Optionally, you can add icons to the links -->
-        <li><a href="/admin"><i class="fa fa-folder-o"></i> <span>Главная</span></a></li>
-        <li><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
-        <li><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления категориями</span></a></li>
-        <li><a href="/admin/upload"><i class="fa fa-download"></i> <span>Загрузка изображений</span></a></li>
+
+        <li class="<?php if (Category::get == '/admin') echo 'active';?>"><a href="/admin"><i class="fa fa-folder-o"></i> <span>Главная</span></a></li>
+        <li class="<?php if (Category::getURI() == '/admin/gallery') echo 'active';?>"><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
+        <li class="<?php if (Category::getURI() == '/admin/category') echo 'active';?>"><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления альбомами</span></a></li>
+        <li class="<?php if (Category::getURI() == '/admin/upload') echo 'active';?>"><a href="/admin/upload"><i class="fa fa-download"></i> <span>Загрузка изображений</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-sign-out"></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
