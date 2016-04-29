@@ -3,3 +3,8 @@
 /template/uploads/*
 /template/gallery/large/*
 /template/gallery/small/*
+*.DS_Store
+*.xml
+*.properties
+nbproject/private/config.properties
+nbproject/
