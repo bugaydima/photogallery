@@ -29,8 +29,26 @@
             <div class="col-xs-12">
                 <div class="box-body">
                     <div class="col-md-12 col-sm-6 col-xs-4">
-                        <div class="upload" id="upload"></div>
-                        <div id="res"></div>
+                        <div id="drag-and-drop-zone" class="uploader">
+                            <div>Drag &amp; Drop перетащите изображения сюда</div>
+                            <div class="or">-или-</div>
+                            <div class="browser">
+                                <label>
+                                    <span>Нажмите чтоб выбрать...</span>
+                                    <input type="file" name="files[]"  accept="image/*" multiple="multiple" title='Нажмите чтобы выбрать изображение'>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title">Загрузки</h3>
+                                </div>
+                                <div class="panel-body demo-panel-files" id='demo-files'>
+                                    <span class="demo-note">Вы еще не выбрали / перетащили файлы...</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

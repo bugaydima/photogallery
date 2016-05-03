@@ -22,15 +22,12 @@
         apply the skin class to the body tag so the changes take effect.
   -->
   <link rel="stylesheet" href="/template/admin/dist/css/skins/skin-blue.min.css">
+  <link rel="stylesheet" href="/template/admin/css/uploader.css">
+  <link rel="stylesheet" href="/template/admin/css/demo.css">
   <link rel="shortcut icon" href="/template/photo.ico" type="image/x-icon">
-
-  <link href="/template/admin/css/upload.css" rel="stylesheet">
-
+ 
   <script src="/template/admin/js/jquery-1.11.2.min.js"></script>
-  <!--<script src="/template/admin/js/ajax.js"></script>-->
-  <script src="/template/admin/js/myScript.js"></script>
-  <script src="/template/admin/js/core.js"></script>
-  <script src="/template/admin/js/upload.js"></script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -50,7 +47,7 @@ desired effect
 |               | skin-yellow                             |
 |               | skin-red                                |
 |               | skin-green                              |
-|---------------------------------------------------------|
+|--------------------------------------------------------|
 |LAYOUT OPTIONS | fixed                                   |
 |               | layout-boxed                            |
 |               | layout-top-nav                          |

@@ -96,6 +96,10 @@
      Both of these plugins are recommended to enhance the
      user experience. Slimscroll is required when using the
      fixed layout. -->
+
+  <script src="/template/admin/js/demo-preview.js"></script>
+  <script src="/template/admin/js/dmuploader.js"></script>
+  <script src="/template/admin/js/script_upload.js"></script>
 </body>
 </html>
 
