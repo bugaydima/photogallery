@@ -215,7 +215,7 @@ class Uploader {
                 $metas['extension'] = substr(strrchr(strtolower($field['name'][$i]), "."),1);
                 $metas['type'] = preg_split('[/]', $field['type'][$i]);
                 $metas['extension'] = $field['Field_Type'] == 'link' && empty($metas['extension']) ? $metas['type'][1] : $metas['extension'];
-                $metas['old_name'] = substr($field['name'][$i], 0, -(strlen(strrchr($field['name'][$i], $metas['extension']))+1));
+                $metas['old_name'] = substr($field['name'][$i], 0, -(strlen(strrchr($field['name'][$i], '.'))+0));
                 $metas['size'] = $field['size'][$i];
                 $metas['size2'] = $this->formatSize($metas['size']);
                 $metas['name'] = $this->generateFileName($this->options['title'], array('name'=>$metas['old_name'], 'size'=>$metas['size'])) . (!empty($metas['extension']) ? "." . $metas['extension'] : "");
