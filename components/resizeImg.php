@@ -19,7 +19,7 @@ class resizeImg {
     const WIDTH = 150;
     const HEIGHT = 150;
     const IMAGE_EXT = '.jpg';
-    const DIR_SAVE = 'template/gallery/small';
+    const DIR_SAVE = 'upload/large/';
     
     public function __construct($path) {
         if (!file_exists($path)) {
