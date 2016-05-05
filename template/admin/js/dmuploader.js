@@ -15,7 +15,7 @@
     url: document.URL,
     method: 'POST',
     extraData: {},
-    maxFileSize: 1024*1024*25, // 25Mb
+    maxFileSize: 1024*1024*10, // 10Mb
     maxFiles: 0,
     allowedTypes: 'image/*',
     extFilter: null,

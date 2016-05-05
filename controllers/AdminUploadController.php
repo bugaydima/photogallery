@@ -1,6 +1,4 @@
 <?php
-include(ROOT .'/components/Uploader.php');
-    
 class AdminUploadController extends AdminBase{
 
     public function actionIndex(){
@@ -15,19 +13,15 @@ class AdminUploadController extends AdminBase{
 
          if($_SERVER['REQUEST_METHOD'] == 'POST'){
              if (isset($_POST['data'])) {
-                 $_SESSION['x'] = $_POST['data'];
-                 echo $_POST['data'];
+                 $_SESSION['id_cat'] = $_POST['data'];
              }
-            if(!empty($_FILES['file'])){
-//                if(move_uploaded_file($_FILES['file']['tmp_name'], 'template/gallery/large/' . $_FILES['file']['name'])){
                 $uploader = new Uploader();
-                echo $_FILES['file']['name'];
                 $data = $uploader->upload($_FILES['file'], array(
-                    'limit' => 10, //Maximum Limit of files. {null, Number}
+                    'limit' => 5, //Maximum Limit of files. {null, Number}
                     'maxSize' => 10, //Maximum Size of files {null, Number(in MB's)}
                     'extensions' => null, //Whitelist for file extension. {null, Array(ex: array('jpg', 'png'))}
                     'required' => false, //Minimum one file is required for upload {Boolean}
-                    'uploadDir' => 'upload/', //Upload directory {String}
+                    'uploadDir' => 'template/gallery/large/', //Upload directory {String}
                     'title' => array('name'), //New file name {null, String, Array} *please read documentation in README.md
                     'removeFiles' => true, //Enable file exclusion {Boolean(extra for jQuery.filer), String($_POST field name containing json data with file names)}
                     'perms' => null, //Uploaded file permisions {null, Number}
@@ -38,16 +32,10 @@ class AdminUploadController extends AdminBase{
                     'onComplete' => null, //A callback function name to be called when upload is complete | ($file) | Callback
                     'onRemove' => 'onFilesRemoveCallback' //A callback function name to be called by removing files (must return an array) | ($removed_files) | Callback
                 ));
-                $img = new resizeImg('upload/' . $_FILES['file']['name']);
-                    $img->resize(150, 150, 'crop');
-                    $img->save($_FILES['file']['name']);
-                    Gallery::saveImgToDB($_FILES['file']['name'], $_SESSION['x']);
-              if($data['isComplete']){
-        $files = $data['data'];
-        print_r($files);
-            }
-           
-    }   
+                $img = new resizeImg('template/gallery/large/' . $_FILES['file']['name']);
+                $img->resize(150, 150, 'crop');
+                $img->save($_FILES['file']['name']);
+                Gallery::saveImgToDB($_FILES['file']['name'], $_SESSION['id_cat']);
         }
         $title = "Загрузка изображений";
         require_once(ROOT . '/views/admin/adminUpload.php');
