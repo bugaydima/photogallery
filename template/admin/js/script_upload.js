@@ -92,3 +92,35 @@ $('#drag-and-drop-zone').dmUploader({
         //   $.danidemo.addLog('#demo-files', 'error', 'Браузер не поддерживается (do something else here!): ' + message);
         // }
       });
+      
+// ####################################################################
+// Выделить все checkbox
+$(document).ready(function(){
+   $("#check_all").on('click',function () {
+        if (!$("#check_all").is(":checked"))
+            $(".checkbox").removeAttr("checked");
+        else
+            $(".checkbox").prop("checked","checked");
+    });
+// При выборе checkbox показать кнопку удалить
+    $("#delete_select").hide();
+
+    
+    $(".checkbox").click(function () {
+        if (!$(".checkbox").is(":checked")) 
+            $("#delete_select").hide();
+        else
+             $("#delete_select").show();
+    });
+ 
+    $('#delete_select').click(function(){
+        $.ajax({
+            type: 'POST',
+            url: '/admin/category/delete',
+            dataType: "html",
+            data: ({data: 18}),
+            cache: false,
+            // success: ShowMessage
+        });
+    });
+  });

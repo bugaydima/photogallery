@@ -130,7 +130,7 @@ class Gallery{
         // Текст запроса к БД
         $sql = "UPDATE photos
                 SET
-                    `name` = :name,
+                   `name` = :name,
                     category_id = :category,
                     status = :status
                 WHERE id = :id";
@@ -162,7 +162,7 @@ class Gallery{
         // Соединение с БД
         $db = Db::getConnection();
 
-        $sql ='INSERT INTO photos (`name`, category_id) VALUE (:name , :category)';
+        $sql ='INSERT INTO photos (`name`, category_id, status) VALUE (:name , :category, 0)';
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':name', $path, PDO::PARAM_STR);
