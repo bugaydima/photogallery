@@ -9,6 +9,7 @@ return array(
     
     
     'admin/upload' => 'adminUpload/index',
+    'admin/category/addajax' => 'adminCategory/addAjaxCategory',
     'admin/category/add' => 'adminCategory/addCategory',
     'admin/category/delete' => 'adminCategory/delete',
     'admin/category/update/([0-9]+)' => 'adminCategory/update/$1',

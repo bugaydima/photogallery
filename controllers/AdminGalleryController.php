@@ -58,7 +58,6 @@ class AdminGalleryController extends AdminBase {
 
         $category = Category::getCategoryGallery();
         $photo = Gallery::getPhotoById($id);
-
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Получаем данные из формы
@@ -66,7 +65,7 @@ class AdminGalleryController extends AdminBase {
             $category = $_POST['category'];
             $status = $_POST['status'];
             // Сохраняем изменения
-            Gallery::updatePhotoById($id, $name, $category, $status);
+            Gallery::updatePhotoById($id, $name, $category, $status, $photo['name']);
             // Перенаправляем пользователя на страницу управлениями категориями
             header("Location: /admin/gallery");
         }

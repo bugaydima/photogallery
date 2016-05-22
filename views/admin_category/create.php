@@ -28,15 +28,15 @@
                             <div class="box-header with-border">
                                 <h3 class="box-title">Добавить новый альбом</h3>
                             </div>
-                            <form role="form" action="#" method="post">
+                            <form role="form" action="" method="post" id="ajax_form">
                                 <!-- text input -->
                                 <div class="form-group">
                                     <label>Название</label>
-                                    <input type="text" class="form-control" placeholder="Название ..." name="name">
+                                    <input type="text" class="form-control clr" placeholder="Название ..." name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>Порядковый номер</label>
-                                    <input type="text" class="form-control" placeholder="Номер ..." name="sort_order">
+                                    <input type="text" class="form-control clr" placeholder="Номер ..." name="sort_order">
                                 </div>
                                 <div class="form-group">
                                     <label>Статус</label>
@@ -46,10 +46,27 @@
                                     </select>
                                 </div>
                                 <div class="box-footer">
-                                    <button type="submit" class="btn btn-primary" name="submit"><i class="fa  fa-save"></i>&nbsp;&nbsp;Сохранить</button>
+                                    <button id="form_ajax" type="submit" class="btn btn-primary" name="submit"><i class="fa  fa-save"></i>&nbsp;&nbsp;Сохранить</button>
                                 </div>
+                                </div>
+                                <div class="col-md-6">
                             </form>
-                        </div>
+        <div class="box box-success box-solid" id="result_form" style="display: none">
+            <div class="box-header">
+                <h3 class="box-title" id="result"></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="box box-warning box-solid" id="result_form2" style="display: none">
+            <div class="box-header">
+                <h3 class="box-title" id="result_error"></h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+        </div>
                     </div> 
                 </div>
             </div>

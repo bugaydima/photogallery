@@ -53,6 +53,34 @@ class AdminCategoryController extends AdminBase {
         require_once(ROOT . '/views/admin_category/create.php');
         return true;
     }
+    public function actionAddAjaxCategory()
+    {
+            // Если форма отправлена
+            // Получаем данные из формы
+            if ((!empty($_POST))&&(isset($_SERVER['HTTP_X_REQUESTED_WITH']))&&
+                    ($_SERVER['HTTP_X_REQUESTED_WITH'] == 'XMLHttpRequest')) {
+                $name = $_POST['name'];
+                $sortOrder = $_POST['sort_order'];
+                $status = $_POST['status'];
+             // Флаг ошибок в форме
+                $errors = false;
+             // При необходимости можно валидировать значения нужным образом
+            if (!User::checkName($name)){
+                $errors[] = 'Название альбома не должно быть короче 2-х символов';
+            }
+            if ($errors == false) {
+                // Если ошибок нет
+                // Добавляем новую категорию
+                Category::createCategory($name, $sortOrder, $status);
+               }
+            }
+            $result = [
+                "response" => "Альбом успешно добавлен!!!",
+                "error" => $errors
+                ];
+            echo json_encode($result);
+        return true;
+    }
     public function actionDelete($id)
     {
         // Проверка доступа

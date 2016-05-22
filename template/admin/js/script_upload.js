@@ -1,19 +1,19 @@
-$(document).ready(function(){
-    $.ajax({
-            url: "/admin/upload",
-            type: "POST",
-            data: ({data: $("#my_select option:selected").val()}),
-            dataType: "html",
-          });
-$('#my_select').change(function(){
-    $.ajax({
-            url: "/admin/upload",
-            type: "POST",
-            data: ({data: $("#my_select option:selected").val()}),
-            dataType: "html",
-          });
-    });
-});
+//$(document).ready(function(){
+//    $.ajax({
+//            url: "/admin/upload",
+//            type: "POST",
+//            data: ({data: $("#my_select option:selected").val()}),
+//            dataType: "html",
+//          });
+//$('#my_select').change(function(){
+//    $.ajax({
+//            url: "/admin/upload",
+//            type: "POST",
+//            data: ({data: $("#my_select option:selected").val()}),
+//            dataType: "html",
+//          });
+//    });
+//});
 
 $('#drag-and-drop-zone').dmUploader({
         url: '/admin/upload',
@@ -112,15 +112,45 @@ $(document).ready(function(){
         else
              $("#delete_select").show();
     });
- 
-    $('#delete_select').click(function(){
-        $.ajax({
-            type: 'POST',
-            url: '/admin/category/delete',
-            dataType: "html",
-            data: ({data: 18}),
-            cache: false,
-            // success: ShowMessage
-        });
-    });
   });
+//########################################################################  
+$( document ).ready(function() {
+    $("#form_ajax").click(
+		function(){
+			sendAjaxForm('result_form', 'ajax_form', '/admin/category/addajax');
+			return false; 
+		}
+	);
+});
+ 
+function sendAjaxForm(result_form, ajax_form, url) {
+    $.ajax({
+        url:     url, 
+        type:     "POST", 
+        dataType: "html", 
+        data: $("#"+ajax_form).serialize(),  // Сеарилизуем объект
+        success: function(response) { //Данные отправлены успешно
+                var result = JSON.parse(response);
+                console.log(result);
+                $(".clr").val('');
+                
+                if(result.error ===false){
+                    $("#result_form2").css({ 'display': "none" });
+                    $("#result_form").css({ 'display': "block" });
+                    $("#result").html(result.response);
+                    console.log("false");
+                }else{
+                    $("#result_form").css({ 'display': "none" });
+                    $("#result_form2").css({ 'display': "block" });
+                    $("#result_error").html(result.error);
+                    console.log("else");
+                }
+                    
+    
+                console.log("succsses");
+    	},
+    	error: function() { // Данные не отправлены
+    		
+    	}
+ 	});
+}

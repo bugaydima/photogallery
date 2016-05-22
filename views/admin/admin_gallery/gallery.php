@@ -54,7 +54,7 @@
                   <td><a href="/admin/gallery/delete/<?php echo $photo['id']; ?>" title="Удалить"><i class="fa fa-trash-o"></i></a></td>
                 </tr>
                 <?php endforeach;?>
-                
+                <div id="results"><!-- content will be loaded here --></div>
               </table>
                 <div class="box-footer clearfix">
                      <?php echo $pagination->get(); ?>

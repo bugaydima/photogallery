@@ -123,7 +123,7 @@ class Gallery{
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
-    public static function updatePhotoById($id, $name, $category, $status)
+    public static function updatePhotoById($id, $name, $category, $status, $photo)
     {
         // Соединение с БД
         $db = Db::getConnection();
@@ -140,6 +140,8 @@ class Gallery{
         $result->bindParam(':name', $name, PDO::PARAM_STR);
         $result->bindParam(':category', $category, PDO::PARAM_INT);
         $result->bindParam(':status', $status, PDO::PARAM_INT);
+        rename("template/gallery/large/$photo", "template/gallery/large/$name");
+        rename("template/gallery/small/$photo", "template/gallery/small/$name");
         return $result->execute();
     }
     public static function getPhotoById($id)
