@@ -33,13 +33,14 @@ class UserController {
             $email = $_POST['email'];
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
+            $username = $_POST['user_name'];
             
             $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
 
             $config = new PHPAuth\Config($dbh);
             $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
             
-            $registration = $auth->register($email, $password, $confirm_password, $params = Array(), $captcha = NULL, $sendmail = TRUE);
+            $registration = $auth->register($email, $password, $confirm_password, $username, $params = Array(), $captcha = NULL, $sendmail = TRUE);
             
             // Флаг ошибок
 //            $errors = false;

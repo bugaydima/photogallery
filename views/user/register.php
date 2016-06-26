@@ -39,10 +39,10 @@
 <?php endif; ?>
 
     <form action="#" method="post">
-<!--      <div class="form-group has-feedback">
-          <input type="text" name="name" class="form-control" placeholder="Имя" value="<?php echo $name; ?>">
+      <div class="form-group has-feedback">
+          <input type="text" name="user_name" class="form-control" placeholder="Имя" >
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>-->
+      </div>
       <div class="form-group has-feedback">
           <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo $email; ?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
