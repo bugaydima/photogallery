@@ -16,54 +16,57 @@
   <link rel="stylesheet" href="/template/admin/dist/css/AdminLTE.min.css">
   <!-- iCheck -->
   <link rel="stylesheet" href="/template/admin/plugins/iCheck/square/blue.css">
-
+  <style>
+      .register-box{
+          width: 420px;
+      }
+  </style>
 </head>
 <body class="hold-transition register-page">
-<div class="register-box">
+    <div class="register-box" >
   <div class="register-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="/admin"><b>Admin</b>LTE</a>
   </div>
 
   <div class="register-box-body">
-    <p class="login-box-msg">Регистрация нового пользователя</p>
-<?php if ($result): ?>
-    <p>Вы зарегистрированы!</p>
+      <p class="login-box-msg">Регистрация нового пользователя</p>
+       
+<?php if (isset($registration) && $registration['error'] == TRUE): ?>
+    <?= '<p class="login-box-msg"  style="color:red">' . $registration['message'] . '</p>'; ?>
 <?php else: ?>    
-<?php if (isset($errors) && is_array($errors)): ?>
-    <ul>
-        <?php foreach ($errors as $error): ?>
-            <li> - <?php echo $error; ?></li>
-        <?php endforeach; ?>
-    </ul>
+<?= '<p class="login-box-msg"  style="color:green">' . $registration['message'] . '</p>'; ?>
+    
 <?php endif; ?>
+
     <form action="#" method="post">
-      <div class="form-group has-feedback">
+<!--      <div class="form-group has-feedback">
           <input type="text" name="name" class="form-control" placeholder="Имя" value="<?php echo $name; ?>">
         <span class="glyphicon glyphicon-user form-control-feedback"></span>
-      </div>
+      </div>-->
       <div class="form-group has-feedback">
           <input type="email" name="email" class="form-control" placeholder="Email" value="<?php echo $email; ?>">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-          <input type="password" name="password" class="form-control" placeholder="Пароль" value="<?php echo $password; ?>">
+          <input type="password" name="password" class="form-control" placeholder="Пароль" value="">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
-<!--      <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Повторить пароль">
-        <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-      </div>-->
+      <div class="form-group has-feedback">
+          <input type="password" class="form-control" name="confirm_password" placeholder="Повторить пароль">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
       <div class="row">
-        <div class="col-xs-8">
+        <div class="col-xs-8">  
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Я согласен с <a href="#">условиями</a>
+              <!--<input type="checkbox"> Я согласен с <a href="#">условиями</a>-->
+              <a href="/user/login" class="text-center">Я уже зарегестрирован. Войти</a>
             </label>
           </div>
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-            <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Регистрация</button>
         </div>
         <!-- /.col -->
       </div>
@@ -77,11 +80,11 @@
         Google+</a>
     </div>-->
 
-    <a href="/user/login" class="text-center">Я уже зарегестрирован. Войти</a>
+<!--    <a href="/user/login" class="text-center">Я уже зарегестрирован. Войти</a>-->
   </div>
   <!-- /.form-box -->
 </div>
-<?php endif; ?>
+
 <!-- /.register-box -->
 
 <!-- jQuery 2.2.0 -->

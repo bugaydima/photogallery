@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 session_start();
 //2. Подключения файлов системы
 define('ROOT', dirname(__FILE__));
-
+require_once 'vendor/autoload.php';
 require_once (ROOT.'/components/Autoload.php');
 
 //3. Установка соединения С БД

@@ -17,6 +17,11 @@
   <!-- iCheck -->
   <link rel="stylesheet" href="/template/admin/plugins/iCheck/square/blue.css">
 
+  <style>
+      .login-box{
+          width: 420px;
+      }
+  </style>
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -27,7 +32,7 @@
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>Admin</b></a>
+    <a href="/admin"><b>Admin</b></a>
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

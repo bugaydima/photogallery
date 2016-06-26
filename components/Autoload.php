@@ -1,5 +1,5 @@
 <?php
-function __autoload($class_name){
+function my_autoload($class_name){
     $array_path = array(
         '/models/',
         '/components/'
@@ -12,3 +12,4 @@ function __autoload($class_name){
         }
     }
 }
+spl_autoload_register('my_autoload');

@@ -28,7 +28,7 @@ $lang['email_invalid'] = "Недопустимый E-Mail.";
 $lang['email_incorrect'] = "E-Mail неверен.";
 $lang['email_banned'] = "Этот E-Mail запрещен.";
 $lang['email_changed'] = "E-Mail изменен успешно.";
-$lang['email_taken'] = "Этот E-Mail уже используется!.";
+$lang['email_taken'] = "Этот E-Mail уже используется!";
 
 $lang['newemail_match'] = "Новый E-Mail совпадает со старым.";
 
