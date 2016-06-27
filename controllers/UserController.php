@@ -55,34 +55,31 @@ class UserController {
         // Переменные для формы
         $email = false;
         $password = false;
-        
+        $registration = false;
+        $remember = false;
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена 
             // Получаем данные из формы
             $email = $_POST['email'];
             $password = $_POST['password'];
-            // Флаг ошибок
-            $errors = false;
-            // Валидация полей
-            if (!User::checkEmail($email)) {
-                $errors[] = 'Неправильный email';
+            if (isset($_POST['remember'])){
+                $remember = $_POST['remember'];
             }
-            if (!User::checkPassword($password)) {
-                $errors[] = 'Пароль не должен быть короче 6-ти символов';
-            }
-            // Проверяем существует ли пользователь
-            $userId = User::checkUserData($email, $password);
-            if ($userId == false) {
-                // Если данные неправильные - показываем ошибку
-                $errors[] = 'Неправильные данные для входа на сайт';
-            } else {
-                // Если данные правильные, запоминаем пользователя (сессия)
-                User::auth($userId);
-                // Перенаправляем пользователя в закрытую часть - кабинет 
-                header("Location: /admin");
-            }
+            
+            
+            $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
+
+            $config = new PHPAuth\Config($dbh);
+            $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
+            $registration = $auth->login($email, $password, $remember);
+            
+            if ($registration['error'] == false) {
+                setcookie($config->cookie_name, $registration['hash'], $registration['expire'], $config->cookie_path, $config->cookie_domain, $config->cookie_secure, $config->cookie_http);
+             }
+             header("Location: /admin");
         }
+        
         // Подключаем вид
         require_once(ROOT . '/views/user/login.php');
         return true;

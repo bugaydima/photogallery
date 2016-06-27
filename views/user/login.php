@@ -37,15 +37,13 @@
   <!-- /.login-logo -->
   <div class="login-box-body">
     <p class="login-box-msg">Введите данные для входа</p>
+<?php if (isset($registration) && $registration['error'] == TRUE): ?>
+    <?= '<p class="login-box-msg"  style="color:red">' . $registration['message'] . '</p>'; ?>
+<?php else: ?>    
+<?= '<p class="login-box-msg"  style="color:green">' . $registration['message'] . '</p>'; ?>
     
-<?php if (isset($errors) && is_array($errors)): ?>
-    <ul>
-        <?php foreach ($errors as $error): ?>
-            <li> - <?php echo $error; ?></li>
-        <?php endforeach; ?>
-    </ul>
-<?php endif; ?>
-    
+<?php endif; ?>    
+
     <form action="#" method="post">
       <div class="form-group has-feedback">
           <input type="email" name="email" class="form-control" placeholder="Email">
@@ -59,7 +57,7 @@
         <div class="col-xs-8">
           <div class="checkbox icheck">
             <label>
-              <input type="checkbox"> Запомнить
+                <input type="checkbox" name="remember" value="1"> Запомнить
             </label>
           </div>
         </div>

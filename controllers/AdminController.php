@@ -11,11 +11,13 @@ class AdminController extends AdminBase {
     public function actionIndex(){
 
         self::checkAdmin();
+        
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
+//        $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        //$user = User::getUserById($userId);
 
+        
         $total = Gallery::getTotalPhoto();
 
         $totalAlbum = Gallery::getTotalAlbumsPhoto();
@@ -23,17 +25,7 @@ class AdminController extends AdminBase {
         $category = Category::getAdminCategory();
         $title = "Главная";
         
-//        $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
-//
-//        $config = new PHPAuth\Config($dbh);
-//        $auth = new PHPAuth\Auth($dbh, $config);
-//
-//        if (!$auth->isLogged()) {
-//            header('HTTP/1.0 403 Forbidden');
-//            echo "Forbidden";
-//
-//            exit();
-//        }
+        
 
         require_once(ROOT . '/views/admin/AdminIndex.php');
         return true;

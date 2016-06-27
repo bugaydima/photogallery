@@ -65,11 +65,20 @@ class User {
      */
     public static function checkLogged()
     {
-        // Если сессия есть, вернем идентификатор пользователя
-        if (isset($_SESSION['user'])) {
-            return $_SESSION['user'];
+        $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
+
+        $config = new PHPAuth\Config($dbh);
+        $auth = new PHPAuth\Auth($dbh, $config);
+
+        if (!$userId = $auth->isLogged()) {
+            header("Location: /user/login");
         }
-        header("Location: /user/login");
+        
+        // Если сессия есть, вернем идентификатор пользователя
+//        if (isset($_SESSION['user'])) {
+//            return $_SESSION['user'];
+//        }
+//        header("Location: /user/login");
     }
 
     /**
