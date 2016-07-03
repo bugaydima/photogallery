@@ -187,7 +187,7 @@ desired effect
               <!-- The user image in the navbar-->
               <img src="/template/admin/dist/img/avatar2.jpg" class="user-image" alt="User Image">
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
-              <span class="hidden-xs"> <?php echo $user['name'];?></span>
+              <span class="hidden-xs"> <?php echo $user;?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
@@ -195,7 +195,7 @@ desired effect
                 <img src="/template/admin/dist/img/avatar2.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                   <?php echo $user['name'];?> - Web Developer
+                   <?php echo $user;?> - Web Developer
                   <small>Member since Nov. 2012</small>
                 </p>
               </li>
@@ -245,7 +245,7 @@ desired effect
           <img src="/template/admin/dist/img/avatar2.jpg" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-            <p><?php echo $user['name'];?></p>
+            <p><?php echo $user;?></p>
           <!-- Status -->
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>

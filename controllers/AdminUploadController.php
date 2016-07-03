@@ -3,11 +3,8 @@ class AdminUploadController extends AdminBase{
 
     public function actionIndex(){
 
-        self::checkAdmin();
-        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
+        
         $albums = Category::getCategoryGallery();
         $category = Category::getAdminCategory();
 
@@ -38,7 +35,9 @@ class AdminUploadController extends AdminBase{
                 Gallery::saveImgToDB($_FILES['file']['name'], $_SESSION['id_cat']);
         }
         $title = "Загрузка изображений";
-        require_once(ROOT . '/views/admin/adminUpload.php');
+        
+        $this->render('admin\adminUpload', ['title' => $title,
+                                            'user'  => $userId['email']]);
         return true;
     }
 }

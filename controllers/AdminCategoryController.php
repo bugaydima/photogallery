@@ -4,25 +4,25 @@ class AdminCategoryController extends AdminBase {
 
     public function actionIndex($page = 1)
     {
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
+        
         $category = Category::getAdminCategoryGallery();
 
         // Общее количетсво категорий (необходимо для постраничной навигации)
-//        $total = Category::getTotalCategory();
+        //$total = Category::getTotalCategory();
         // Создаем объект Pagination - постраничная навигация
-//        $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
+        //$pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         $title = "Управления альбомами";
 
-        require_once(ROOT . '/views/admin_category/adminCategory.php');
+        $this->render('admin_category/adminCategory', ['title' => $title,
+                                                       'category' => $category,
+                                                       'user'  => $userId['email']]);
         return true;
     }
     public function actionAddCategory()
     {
-        self::checkAdmin();
+        $userId = self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = User::checkLogged();
         // Получаем информацию о текущем пользователе

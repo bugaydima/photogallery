@@ -1,22 +1,10 @@
 <?php
-/**
- * Description of AdminController
- *
- * @author Dima
- */
-//include("vendor/phpauth/phpauth/Config.php");
-//include("vendor/phpauth/phpauth/Auth.php");
+
 class AdminController extends AdminBase {
 
     public function actionIndex(){
-
-        self::checkAdmin();
-        
-        // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-//        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        //$user = User::getUserById($userId);
-
+        // Проверяем авторизирован ли пользователь и получаем его данные. Если нет, он будет переадресован
+        $userId = self::checkAdmin();
         
         $total = Gallery::getTotalPhoto();
 
@@ -25,9 +13,10 @@ class AdminController extends AdminBase {
         $category = Category::getAdminCategory();
         $title = "Главная";
         
-        
-
-        require_once(ROOT . '/views/admin/AdminIndex.php');
-        return true;
+        return $this->render('admin\adminIndex', ['title' => $title,
+                                                  'total' => $total,
+                                                  'totalAlbum' => $totalAlbum,
+                                                  'category' => $category,
+                                                  'user' => $userId['email']]);
     }
 }

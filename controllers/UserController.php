@@ -1,12 +1,4 @@
 <?php
-//namespace UserController;
-//
-//use PHPAuth;
-/**
- * Description of UserController
- *
- * @author Dima
- */
 
 class UserController {
     
@@ -21,7 +13,6 @@ class UserController {
     public function actionRegister(){
         
         // Переменные для формы
-//        $name = false;
         $email = false;
         $password = false;
         $confirm_password = false;
@@ -36,13 +27,12 @@ class UserController {
             $confirm_password = $_POST['confirm_password'];
             $username = $_POST['user_name'];
             
-            $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
+            $dbh = Db::getConnection();
 
             $config = new PHPAuth\Config($dbh);
             $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
             
             $registration = $auth->register($email, $password, $confirm_password, $username, $params = Array(), $captcha = NULL, $sendmail = TRUE);
-            
         }
         require_once (ROOT . '/views/user/register.php');
         return true;
@@ -66,12 +56,11 @@ class UserController {
             if (isset($_POST['remember'])){
                 $remember = $_POST['remember'];
             }
-            
-            
-            $dbh = new PDO("mysql:host=localhost;dbname=gallery", "root", "");
+            $dbh = Db::getConnection();
 
             $config = new PHPAuth\Config($dbh);
             $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
+            
             $registration = $auth->login($email, $password, $remember);
             
             if ($registration['error'] == false) {
@@ -79,7 +68,6 @@ class UserController {
              }
              header("Location: /admin");
         }
-        
         // Подключаем вид
         require_once(ROOT . '/views/user/login.php');
         return true;
@@ -90,7 +78,16 @@ class UserController {
     public function actionLogout()
     {
         // Удаляем информацию о пользователе из сессии
-        unset($_SESSION["user"]);
+        $dbh = Db::getConnection();
+
+        $config = new PHPAuth\Config($dbh);
+        $auth = new PHPAuth\Auth($dbh, $config);
+
+        if (!$auth->isLogged()) {
+            header("Location: /user/login");
+        }
+        $userHash = $auth->getSessionHash();
+        $auth->logout($userHash);
         
         // Перенаправляем пользователя на главную страницу
         header("Location: /user/login");
