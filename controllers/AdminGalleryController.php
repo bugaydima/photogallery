@@ -8,11 +8,8 @@ class AdminGalleryController extends AdminBase {
 
     public function actionIndex($page = 1)
     {
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
 
         $allPhotos = Gallery::getAllPhotosByAdmin($count = Gallery::SHOW_BY_DEFAULT, $page);
         // Общее количетсво фотографий (необходимо для постраничной навигации)
@@ -20,18 +17,17 @@ class AdminGalleryController extends AdminBase {
 
         // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
-        $title = "Галерея";
-        require_once(ROOT . '/views/admin/admin_gallery/gallery.php');
-        return true;
+        
+        return $this->render('admin\admin_gallery\index', ['title' => 'Галерея',
+                                                           'allPhotos' => $allPhotos,
+                                                           'pagination' => $pagination,
+                                                           'user' => $userId['username']]);
     }
     public function actionDelete($id)
     {
-        // Проверка доступа
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
+        
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
@@ -44,34 +40,36 @@ class AdminGalleryController extends AdminBase {
             header("Location: /admin/gallery");
         }
         // Подключаем вид
-        require_once(ROOT . '/views/admin/admin_gallery/delete.php');
-        return true;
+        return $this->render('admin\admin_gallery\delete', ['title' => 'Галерея',
+                                                            'id' => $id,    
+                                                            'user' => $userId['username']]);
     }
     public function actionUpdate($id)
     {
-        // Проверка доступа
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
 
         $category = Category::getCategoryGallery();
         $photo = Gallery::getPhotoById($id);
-        if (isset($_POST['submit'])) {
-            // Если форма отправлена
-            // Получаем данные из формы
-            $name = $_POST['name'];
-            $category = $_POST['category'];
-            $status = $_POST['status'];
+        
+        $submit = filter_input(INPUT_POST, 'submit', FILTER_VALIDATE_BOOLEAN);
+        if (isset($submit)) {
+            // Если форма отправлена $_POST['submit'])
+            // Получаем данные из формы и фильтруем
+            $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $category = filter_input(INPUT_POST, 'category', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $status = filter_input(INPUT_POST, 'status', FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
             // Сохраняем изменения
             Gallery::updatePhotoById($id, $name, $category, $status, $photo['name']);
             // Перенаправляем пользователя на страницу управлениями категориями
             header("Location: /admin/gallery");
         }
-        $title = 'Редактирование фото';
         // Подключаем вид
-        require_once(ROOT . '/views/admin/admin_gallery/update.php');
-        return true;
+        return $this->render('admin\admin_gallery\update', ['title' => 'Редактирование фото',
+                                                            'id' => $id,    
+                                                            'photo' => $photo,    
+                                                            'category' => $category,    
+                                                            'user' => $userId['username']]);
     }
 }

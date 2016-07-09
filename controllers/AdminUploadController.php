@@ -34,9 +34,9 @@ class AdminUploadController extends AdminBase{
                 $img->save($_FILES['file']['name']);
                 Gallery::saveImgToDB($_FILES['file']['name'], $_SESSION['id_cat']);
         }
-        $title = "Загрузка изображений";
         
-        $this->render('admin\adminUpload', ['title' => $title,
+        $this->render('admin\adminUpload', ['title' => 'Загрузка изображений',
+                                            'albums' => $albums,
                                             'user'  => $userId['email']]);
         return true;
     }

@@ -13,20 +13,16 @@ class AdminCategoryController extends AdminBase {
         //$total = Category::getTotalCategory();
         // Создаем объект Pagination - постраничная навигация
         //$pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
-        $title = "Управления альбомами";
 
-        $this->render('admin_category/adminCategory', ['title' => $title,
-                                                       'category' => $category,
-                                                       'user'  => $userId['email']]);
+        $this->render('admin/admin_category/category', ['title' => 'Управления альбомами',
+                                                            'category' => $category,
+                                                            'user'  => $userId['username']]);
         return true;
     }
     public function actionAddCategory()
     {
-        $userId = self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
 
         // Обработка формы
         if (isset($_POST['submit'])) {
@@ -49,8 +45,8 @@ class AdminCategoryController extends AdminBase {
                 header("Location: /admin/category");
             }
         }
-        $title = "Добавления альбома";
-        require_once(ROOT . '/views/admin_category/create.php');
+        $this->render('admin/admin_category/create', ['title' => 'Добавления альбома',
+                                                      'user'  => $userId['username']]);
         return true;
     }
     public function actionAddAjaxCategory()
@@ -83,12 +79,9 @@ class AdminCategoryController extends AdminBase {
     }
     public function actionDelete($id)
     {
-        // Проверка доступа
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
+        
         // Обработка формы
         if (isset($_POST['submit'])) {
             // Если форма отправлена
@@ -100,19 +93,17 @@ class AdminCategoryController extends AdminBase {
         if (isset($_POST['back'])) {
             header("Location: /admin/category");
         }
-        $title = "Удалить альбом";
         // Подключаем вид
-        require_once(ROOT . '/views/admin_category/delete.php');
+        $this->render('admin/admin_category/delete', ['title' => 'Удалить альбом',
+                                                      'id'    => $id,  
+                                                      'user'  => $userId['username']]);
         return true;
     }
      public function actionUpdate($id)
     {
-        // Проверка доступа
-        self::checkAdmin();
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
-        $userId = User::checkLogged();
-        // Получаем информацию о текущем пользователе
-        $user = User::getUserById($userId);
+        $userId = self::checkAdmin();
+        
         // Получаем данные о конкретной категории
         $category = Category::getCategoryById($id);
         // Обработка формы
@@ -127,9 +118,10 @@ class AdminCategoryController extends AdminBase {
             // Перенаправляем пользователя на страницу управлениями категориями
             header("Location: /admin/category");
         }
-        $title = "Редактировать альбом";
         // Подключаем вид
-        require_once(ROOT . '/views/admin_category/update.php');
+        $this->render('admin/admin_category/update', ['title' => 'Редактировать альбом',
+                                                      'category' => $category,
+                                                      'user'  => $userId['username']]);
         return true;
     }
 
