@@ -42,14 +42,14 @@ class User {
      * @param string $password <p>Пароль</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
-public static function checkPassword($password){
+    public static function checkPassword($password){
         
         if (strlen($password) >= 6) {
             return true;
         }
         return false;
     }
-public static function getAllUser($count = self::SHOW_BY_DEFAULT, $page = 1)
+    public static function getAllUser($count = self::SHOW_BY_DEFAULT, $page = 1)
     {
         $offset = ($page - 1) * $count;
     // Соединение с БД
@@ -79,7 +79,7 @@ public static function getAllUser($count = self::SHOW_BY_DEFAULT, $page = 1)
         }
         return $users;
     }
-public static function getTotalUsers() 
+    public static function getTotalUsers() 
     {
         // Соединение с БД
         $db = Db::getConnection();
@@ -144,6 +144,29 @@ public static function getTotalUsers()
             throw new Exception('Произошел сбой при изменении.');
     }
         return true;
+    }
+    public static function getUserConfig()
+    {
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = "SELECT `setting`, `value` FROM config";
+        
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+
+        // Выполнение коменды
+        $result->execute();
+        // Получение и возврат результатов
+        $i = 0;
+        $config = array();
+        while ($row = $result->fetch()) {
+            $config[$i]['setting'] = $row['setting'];
+            $config[$i]['value'] = $row['value'];
+            $i++;
+        }
+        return $config;
     }
 }
 ################################################################################

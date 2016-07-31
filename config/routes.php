@@ -23,6 +23,8 @@ return array(
     
     'admin/gallery' => 'adminGallery/index',
     
+    'admin/config' => 'adminConfig/config',
+    
     'admin/user/update/([0-9]+)' => 'adminUser/update/$1',
     'admin/user/page-([0-9]+)' => 'adminUser/index/$1',
     'admin/user' => 'adminUser/index',

@@ -272,10 +272,11 @@ desired effect
         <li class="<?php if (Category::getURI() == '/admin/gallery') echo 'active';?>"><a href="/admin/gallery"><i class="fa fa-photo"></i> <span>Галерея</span></a></li>
         <li class="<?php if (Category::getURI() == '/admin/category') echo 'active';?>"><a href="/admin/category"><i class="fa fa-list"></i> <span>Управления альбомами</span></a></li>
         <li class="<?php if (Category::getURI() == '/admin/upload') echo 'active';?>"><a href="/admin/upload"><i class="fa fa-download"></i> <span>Загрузка изображений</span></a></li>
+        <li class="<?php if (Category::getURI() == '/admin/config') echo 'active';?>"><a href="/admin/config"><i class="fa fa-download"></i> <span>Конфигурация</span></a></li>
+        <li class="<?php if (Category::getURI() == '/admin/user') echo 'active';?>"><a href="/admin/user"><i class="fa fa-download"></i> <span>Управления пользователями</span></a></li>
         <li class="treeview">
           <a href="#"><i class="fa fa-user"></i> <span>Пользователи</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="/admin/user"><i class="fa fa-user-plus"></i>Управления пользователями</a></li>
             <li><a href="/user/logout"><i class="fa  fa-sign-out"></i>Выход</a></li>
           </ul>
         </li>

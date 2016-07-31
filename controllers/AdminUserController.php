@@ -53,4 +53,5 @@ class AdminUserController extends AdminBase{
                                                   'user' => $user['username']]);
         return true;
     }
+    
 }
