@@ -138,7 +138,7 @@ class Auth
 	* @return array $return
 	*/
 
-	public function register($email, $password, $repeatpassword, $username, $params = Array(), $captcha = NULL, $sendmail = NULL)
+	public function register($email, $password, $repeatpassword, $username, $role, $params = Array(), $captcha = NULL, $sendmail = NULL)
 	{
 		$return['error'] = true;
 
@@ -189,7 +189,7 @@ class Auth
 			return $return;
 		}
 
-		$addUser = $this->addUser($email, $password,  $username, $params, $sendmail);
+		$addUser = $this->addUser($email, $password,  $username, $role, $params, $sendmail);
 
 		if($addUser['error'] != 0) {
 			$return['message'] = $addUser['message'];
@@ -509,7 +509,7 @@ class Auth
 	* @return int $uid
 	*/
 
-	private function addUser($email, $password,  $username, $params = array(), &$sendmail)
+	private function addUser($email, $password,  $username, $role, $params = array(), &$sendmail)
 	{
 		$return['error'] = true;
 
@@ -555,9 +555,9 @@ class Auth
 			}, $customParamsQueryArray));
 		} else { $setParams = ''; }
 
-		$query = $this->dbh->prepare("UPDATE {$this->config->table_users} SET email = ?, password = ?, username = ?, isactive = ? {$setParams} WHERE id = ?");
+		$query = $this->dbh->prepare("UPDATE {$this->config->table_users} SET email = ?, password = ?, username = ?, role = ?, isactive = ? {$setParams} WHERE id = ?");
 
-		$bindParams = array_values(array_merge(array($email, $password, $username, $isactive), $params, array($uid)));
+		$bindParams = array_values(array_merge(array($email, $password, $username, $role, $isactive), $params, array($uid)));
 
 		if(!$query->execute($bindParams)) {
 			$query = $this->dbh->prepare("DELETE FROM {$this->config->table_users} WHERE id = ?");

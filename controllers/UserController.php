@@ -1,6 +1,7 @@
 <?php
 
-class UserController {
+class UserController extends AdminBase{
+    
     
     /**
      * Регистрация пользователя 
@@ -32,7 +33,7 @@ class UserController {
             $config = new PHPAuth\Config($dbh);
             $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
             
-            $registration = $auth->register($email, $password, $confirm_password, $username, $params = Array(), $captcha = NULL, $sendmail = TRUE);
+            $registration = $auth->register($email, $password, $confirm_password, $username, $role = 'user', $params = Array(), $captcha = NULL, $sendmail = TRUE);
         }
         require_once (ROOT . '/views/user/register.php');
         return true;
@@ -62,15 +63,34 @@ class UserController {
             $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
             
             $registration = $auth->login($email, $password, $remember);
-            
+            //var_dump($registration);
             if ($registration['error'] == false) {
                 setcookie($config->cookie_name, $registration['hash'], $registration['expire'], $config->cookie_path, $config->cookie_domain, $config->cookie_secure, $config->cookie_http);
+                header("Location: /admin");
              }
-             header("Location: /admin");
+             //header("Location: /admin");
         }
         // Подключаем вид
-        require_once(ROOT . '/views/user/login.php');
+        return $this->render('user/login', ['registration' => $registration]);
         return true;
+    }
+    /**
+     * Активация email
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public function actionActivate() 
+    {
+        $dbh = Db::getConnection();
+        $config = new PHPAuth\Config($dbh);
+        $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
+        
+        $result = false;    
+            
+        if (isset($_POST['submit'])) {
+            $key = $_POST['key'];
+            $result = $auth->activate($key);
+        }
+        return $this->render('user/activate', ['result' => $result]);
     }
     /**
      * Удаляем данные о пользователе из сессии
@@ -82,14 +102,49 @@ class UserController {
 
         $config = new PHPAuth\Config($dbh);
         $auth = new PHPAuth\Auth($dbh, $config);
-
+        
         if (!$auth->isLogged()) {
             header("Location: /user/login");
         }
         $userHash = $auth->getSessionHash();
         $auth->logout($userHash);
         
-        // Перенаправляем пользователя на главную страницу
         header("Location: /user/login");
     }
+    public  function actionRequestReset()
+    {
+        $dbh = Db::getConnection();
+        $config = new PHPAuth\Config($dbh);
+        $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
+        
+        $result = false;
+        
+        if (isset($_POST['submit'])) {
+            $email = $_POST['email'];
+            $result = $auth->requestReset($email);
+        }
+        
+       return $this->render('user/request_reset', ['title' => 'Сброс пароля',
+                                           'result' => $result]);
+    }
+    
+    public  function actionReset()
+    {
+        $dbh = Db::getConnection();
+        $config = new PHPAuth\Config($dbh);
+        $auth = new PHPAuth\Auth($dbh, $config, $language = "ru_RU");
+        
+        $result = false;
+        
+        if (isset($_POST['submit'])) {
+            $key = $_POST['key'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+            
+            $result = $auth->resetPass($key, $password, $confirm_password);
+        }
+       return $this->render('user/reset', ['title' => 'Сброс пароля',
+                                           'result' => $result]);
+    }
+    
 }

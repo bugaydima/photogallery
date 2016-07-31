@@ -20,12 +20,11 @@ abstract class AdminBase
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = User::checkLogged();
         
-        $user['role'] = 'admin';
-        if ($user['role'] == 'admin') {
+        if ($userId['role'] == 'admin') {
             return $userId;
         }
-//        // Иначе завершаем работу с сообщением об закрытом доступе
-//        die('Access denied');
+        // Иначе завершаем работу с сообщением об закрытом доступе
+        die('Access denied, свяжитесь с <b>bugaydima@yandex.ru</b> администратором для доступа в админку');
         
     }
     

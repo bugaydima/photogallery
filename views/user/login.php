@@ -78,8 +78,8 @@
     </div>-->
     <!-- /.social-auth-links -->
 
-    <a href="#">Я забыл свой пароль</a><br>
-    <a href="/user/register" class="text-center">Регистрация нового пользователя</a>
+    <a href="request_reset">Я забыл свой пароль</a><br>
+    <a href="register" class="text-center">Регистрация нового пользователя</a>
 
   </div>
   <!-- /.login-box-body -->

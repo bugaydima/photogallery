@@ -84,8 +84,7 @@ class Gallery{
         return $photo;
 
     }
-        public static function getTotalPhoto()
-    {
+    public static function getTotalPhoto() {
         // Соединение с БД
         $db = Db::getConnection();
         // Текст запроса к БД
@@ -98,6 +97,7 @@ class Gallery{
         $row = $result->fetch();
         return $row['count'];
     }
+
     public static function getTotalAlbumsPhoto()
     {
         // Соединение с БД

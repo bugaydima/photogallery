@@ -275,7 +275,7 @@ desired effect
         <li class="treeview">
           <a href="#"><i class="fa fa-user"></i> <span>Пользователи</span> <i class="fa fa-angle-left pull-right"></i></a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-user-plus"></i>Управления пользователями</a></li>
+            <li><a href="/admin/user"><i class="fa fa-user-plus"></i>Управления пользователями</a></li>
             <li><a href="/user/logout"><i class="fa  fa-sign-out"></i>Выход</a></li>
           </ul>
         </li>

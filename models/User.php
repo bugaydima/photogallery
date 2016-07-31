@@ -42,16 +42,109 @@ class User {
      * @param string $password <p>Пароль</p>
      * @return boolean <p>Результат выполнения метода</p>
      */
-    public static function checkPassword($password){
+public static function checkPassword($password){
         
         if (strlen($password) >= 6) {
             return true;
         }
         return false;
     }
-    
+public static function getAllUser($count = self::SHOW_BY_DEFAULT, $page = 1)
+    {
+        $offset = ($page - 1) * $count;
+    // Соединение с БД
+        $db = Db::getConnection();
+        $sql = 'SELECT `id`, `email`, `username`, `role`, `isactive`'
+             .' FROM users '
+             . 'ORDER BY id ASC LIMIT :count OFFSET :offset';
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':count', $count, PDO::PARAM_INT);
+        $result->bindParam(':offset', $offset, PDO::PARAM_INT);
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
 
-    
+        // Выполнение коменды
+        $result->execute();
+        // Получение и возврат результатов
+        $i = 0;
+        $users = array();
+        while ($row = $result->fetch()) {
+            $users[$i]['id'] = $row['id'];
+            $users[$i]['email'] = $row['email'];
+            $users[$i]['username'] = $row['username'];
+            $users[$i]['role'] = $row['role'];
+            $users[$i]['isactive'] = $row['isactive'];
+            $i++;
+        }
+        return $users;
+    }
+public static function getTotalUsers() 
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'SELECT count(id) AS count FROM users';
+        // Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        // Выполнение коменды
+        $result->execute();
+        // Возвращаем значение count - количество
+        $row = $result->fetch();
+        return $row['count'];
+    }
+    public static function getStatusText($status)
+    {
+        switch ($status) {
+            case '1':
+                return 'Активирован';
+                break;
+            case '0':
+                return 'Не активирован';
+                break;
+        }
+    }
+    /**
+     * Возвращает пользователя с указанным id
+     * @param integer $id <p>id пользователя</p>
+     * @return array <p>Массив с информацией о пользователе</p>
+     */
+    public static function getUserById($id)
+    {
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = 'SELECT id, username, isactive, role FROM users WHERE id = :id';
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        // Указываем, что хотим получить данные в виде массива
+        $result->setFetchMode(PDO::FETCH_ASSOC);
+        $result->execute();
+        return $result->fetch();
+    }
+    public static function UserUpdateById($id, $username, $role, $isactive)
+    {
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = "UPDATE users
+                SET
+                   `username` = :username,
+                    `role` = :role,
+                    `isactive` = :isactive
+                WHERE id = :id";
+        // Получение и возврат результатов. Используется подготовленный запрос
+        $result = $db->prepare($sql);
+        $result->bindParam(':id', $id, PDO::PARAM_INT);
+        $result->bindParam(':username', $username, PDO::PARAM_STR);
+        $result->bindParam(':role', $role, PDO::PARAM_STR);
+        $result->bindParam(':isactive', $isactive, PDO::PARAM_INT);
+        //$result->execute();
+        if (!$result->execute()) {
+            throw new Exception('Произошел сбой при изменении.');
+    }
+        return true;
+    }
 }
 ################################################################################
 #                  Старые методы аутентификации пользователя                   #

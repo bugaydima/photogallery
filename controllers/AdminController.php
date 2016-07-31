@@ -5,7 +5,7 @@ class AdminController extends AdminBase {
     public function actionIndex(){
         // Проверяем авторизирован ли пользователь и получаем его данные. Если нет, он будет переадресован
         $userId = self::checkAdmin();
-
+        
         $total = Gallery::getTotalPhoto();
 
         $totalAlbum = Gallery::getTotalAlbumsPhoto();
