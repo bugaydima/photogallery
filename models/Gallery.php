@@ -12,9 +12,11 @@ class Gallery{
         $offset = ($page - 1) * $count;
     // Соединение с БД
         $db = Db::getConnection();
-        $sql = 'SELECT id, `name`, `category_id`, status'
+        $sql = 'SELECT `photos`.`id`,`photos`.`name`, `photos`.`status`, category.name AS category_name '
              .' FROM photos '
-             . 'ORDER BY id ASC LIMIT :count OFFSET :offset';
+             . 'LEFT JOIN category '
+             . 'ON  `category`.id = `photos`.category_id '
+             . 'ORDER BY `photos`.id ASC LIMIT :count OFFSET :offset';
         // Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':count', $count, PDO::PARAM_INT);
@@ -30,7 +32,7 @@ class Gallery{
         while ($row = $result->fetch()) {
             $photosList[$i]['id'] = $row['id'];
             $photosList[$i]['name'] = $row['name'];
-            $photosList[$i]['category_id'] = $row['category_id'];
+            $photosList[$i]['category_name'] = $row['category_name'];
             $photosList[$i]['status'] = $row['status'];
             $i++;
         }
@@ -82,7 +84,6 @@ class Gallery{
             $i++;
         }
         return $photo;
-
     }
     public static function getTotalPhoto() {
         // Соединение с БД
@@ -121,6 +122,7 @@ class Gallery{
         // Получение и возврат результатов. Используется подготовленный запрос
         $result = $db->prepare($sql);
         $result->bindParam(':id', $id, PDO::PARAM_INT);
+        
         return $result->execute();
     }
     public static function updatePhotoById($id, $name, $category, $status, $photo)

@@ -36,10 +36,10 @@
                   <th style="width: 10px" >ID</th>
                   <th style="width: 100px">Name</th>
                   <th>Preview</th>
-                  <th>Category</th>
-                  <th>Status</th>
-                  <th style="width: 20px">Edit</th>
-                  <th style="width: 20px">Delete</th>
+                  <th>Альбом</th>
+                  <th>Статус</th>
+                  <th style="width: 20px">Редак...</th>
+                  <th style="width: 20px">Удалить</th>
                 </tr>
                 <?php foreach ($allPhotos as $photo):?>
                 <tr>
@@ -47,8 +47,12 @@
                                     class="checkbox"></td>
                     <td><?php echo $photo['id'];?></td>
                   <td><?php echo $photo['name'];?></td>
-                  <td><img src="/template/gallery/small/<?php echo $photo['name'];?>"  width="75" height="50" /></td>
-                  <td><?php echo $photo['category_id'];?></td>
+                  <td>
+                      <a href="/template/gallery/large/<?php echo $photo['name'];?>" rel="prettyPhoto[gallery]">
+                      <img src="/template/gallery/small/<?php echo $photo['name'];?>"  width="75" height="50" />
+                      </a>
+                  </td>
+                  <td><?php echo $photo['category_name'];?></td>
                   <td><?php echo Category::getStatusText($photo['status']); ?></td>
                   <td><a href="/admin/gallery/update/<?php echo $photo['id']; ?>" title="Редактировать"><i class="fa fa-pencil-square-o"></i></a></td>
                   <td><a href="/admin/gallery/delete/<?php echo $photo['id']; ?>" title="Удалить"><i class="fa fa-trash-o"></i></a></td>

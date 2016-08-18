@@ -13,7 +13,15 @@ class AdminCategoryController extends AdminBase {
         //$total = Category::getTotalCategory();
         // Создаем объект Pagination - постраничная навигация
         //$pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
-
+        
+        if (isset($_POST['delete2'])) {
+            $checked = $_POST['check_name'];
+            $checked_id = implode(',', $checked);
+            
+            Category::deleteCategoryByArrayId($checked_id);
+            header("Location: /admin/category");
+        }
+        
         $this->render('admin/admin_category/category', ['title' => 'Управления альбомами',
                                                             'category' => $category,
                                                             'user'  => $userId['username']]);

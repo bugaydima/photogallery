@@ -14,25 +14,28 @@ class AdminGalleryController extends AdminBase {
         $allPhotos = Gallery::getAllPhotosByAdmin($count = Gallery::SHOW_BY_DEFAULT, $page);
         // Общее количетсво фотографий (необходимо для постраничной навигации)
         $total = Gallery::getTotalPhoto();
-
+        $category = Category::getCategoryGallery();    
         // Создаем объект Pagination - постраничная навигация
         $pagination = new Pagination($total, $page, Gallery::SHOW_BY_DEFAULT, 'page-');
         
         return $this->render('admin\admin_gallery\index', ['title' => 'Галерея',
                                                            'allPhotos' => $allPhotos,
                                                            'pagination' => $pagination,
+                                                           'category' => $category,
                                                            'user' => $userId['username']]);
     }
     public function actionDelete($id)
     {
         // Проверяем авторизирован ли пользователь. Если нет, он будет переадресован
         $userId = self::checkAdmin();
-        
         // Обработка формы
+        $name = Gallery::getPhotoById($id);
         if (isset($_POST['submit'])) {
             // Если форма отправлена
             // Удаляем товар
             Gallery::deletePhotoById($id);
+            unlink('template/gallery/large/' . $name['name']);
+            unlink('template/gallery/small/' . $name['name']);
             // Перенаправляем пользователя на страницу управлениями товарами
             header("Location: /admin/gallery");
         }

@@ -112,6 +112,16 @@ $(document).ready(function(){
         else
              $("#delete_select").show();
     });
+    // При выборе checkbox показать кнопку удалить
+    $("#myModal2").hide();
+
+    
+    $(".checkbox").click(function () {
+        if (!$(".checkbox").is(":checked")) 
+            $("#myModal2").hide();
+        else
+             $("#myModal2").show();
+    });
   });
 //########################################################################  
 $( document ).ready(function() {

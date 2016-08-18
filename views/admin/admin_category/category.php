@@ -10,11 +10,14 @@
         </ol>
     </section>
     <section class="content">
+      <form role="form" action="" method="post" id="ajax_form">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <button id="delete_select" class="btn btn-primary" name="delete"><i class="fa fa-minus"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные</button>
+                        <button type="button" id="myModal2" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                            <i class="fa fa-trash-o"></i>&nbsp;&nbsp;&nbsp; Удалить выбраные
+                        </button>
                         
                         <div class="col-xs-3">
                         <a class="btn btn-primary" href="/admin/category/add"><i class="fa fa-plus"></i>&nbsp;&nbsp;&nbsp; Добавить альбом</a>
@@ -55,23 +58,21 @@
 
                         </table>
                         <div class="box-footer clearfix">
-                        <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-                            Launch demo modal
-                        </button>
+                            
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                                        <h4 class="modal-title" id="myModalLabel">Удалить альбом</h4>
                                     </div>
                                     <div class="modal-body">
-                                        Lorem
+                                        <p>Вы действительно хотите удалить этот альбом?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+                                        <button id="delete_select" class="btn btn-danger" name="delete2"><i class="fa fa-trash-o"></i>&nbsp;&nbsp;&nbsp; Удалить</button>
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +82,8 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>   
+    </form>
     </section>
 </div>
  

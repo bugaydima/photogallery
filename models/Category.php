@@ -145,6 +145,24 @@ class Category {
         $result->bindParam(':id', $id, PDO::PARAM_INT);
         return $result->execute();
     }
+       /**
+     * Удаляет категорию с заданным множеством id
+     * @param integer $id
+     * @return boolean <p>Результат выполнения метода</p>
+     */
+    public static function deleteCategoryByArrayId($id)
+    {
+        //var_dump($id); die();
+        // Соединение с БД
+        $db = Db::getConnection();
+        // Текст запроса к БД
+        $sql = "DELETE FROM category WHERE id IN ($id)";
+        // Получение и возврат результатов. Используется подготовленный запрос
+       // $result = $db->prepare($sql);
+//        $result->bindParam(':id', $id, PDO::PARAM_INT);
+//        var_dump($result->bindParam(':id', $id, PDO::PARAM_INT)); die();
+        return $db->query($sql);
+    }
      /**
      * Возвращает категорию с указанным id
      * @param integer $id <p>id категории</p>
@@ -208,6 +226,20 @@ class Category {
             case '0':
                 return 'Скрытый';
                 break;
+        }
+    }
+    /**
+     * Возвращает текстое пояснение категории для id категории :<br/>
+     * @param integer $id_category <p>id категории</p>
+     * @return string <p>Текстовое пояснение</p>
+     */
+    public static function getCategoryText($id_category)
+    {
+        $category = Category::getCategoryGallery();
+        foreach ($category as $cat)
+        {
+            if($cat['id'] == $id_category)
+                return $cat['name'];
         }
     }
     /**
